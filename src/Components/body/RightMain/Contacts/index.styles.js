@@ -14,7 +14,8 @@ export const Wrapper = styled(Flex)`
 `;
 
 export const UserName = styled.div`
-    font-size: 0.95rem;
+    font-size: var(--font-small);
     font-weight: 600;
     color: var(--secondary-text);
+    text-transform: capitalize;
 `

@@ -3,6 +3,7 @@ import { LogIn, UserAction } from "redux/actions/user.action";
 import { call, put } from "redux-saga/effects";
 import { setLocalStorage } from "utils/localStorage";
 import { hiddenLoading, showLoading } from "redux/actions/loading";
+import { socket } from "constants/socket.io";
 
 export const signInSaga = function* ({ payload }) {
     try {
@@ -13,6 +14,7 @@ export const signInSaga = function* ({ payload }) {
         yield setLocalStorage("refreshToken", signin.data.refreshToken);
         const user = yield call(getUser);
         yield put(UserAction.getUserSuccess(user.data));
+        yield socket.emit("user", user.data);
         yield put(LogIn())
     } catch (error) {
         yield put(UserAction.postSignInFailure(error.response.data.message));
@@ -33,7 +35,6 @@ export const signUpSaga = function* ({ payload }) {
 
 export const signOutSaga = function* () {
     try {
-
         const out = yield call(signOut);
         yield put(UserAction.postSignOutSuccess(out.data));
         yield setLocalStorage("accessToken", "");

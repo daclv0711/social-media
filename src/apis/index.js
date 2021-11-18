@@ -3,7 +3,7 @@ import { baseUrl } from 'constants/api';
 import { getLocalStorage, setLocalStorage } from 'utils/localStorage';
 
 const instance = axios.create({
-    baseURL: baseUrl,
+    baseURL: `${baseUrl}/api`,
     timeout: 20000,
     headers: {
         'Content-Type': 'application/json'

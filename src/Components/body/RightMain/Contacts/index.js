@@ -3,13 +3,13 @@ import ImgUser from 'assets/images/no-img.png'
 import { Wrapper, UserName } from './index.styles';
 import { Avatar, Badge } from 'antd';
 
-function Contacts(props) {
+function Contacts({ user }) {
     return (
         <Wrapper>
             <Badge dot offset={[-4, 27]} style={{ backgroundColor: 'green' }}>
-                <Avatar src={ImgUser} size={32} />
+                <Avatar src={user.avatar || ImgUser} size={32} />
             </Badge>
-            <UserName>Name</UserName>
+            <UserName>{`${user.last_name} ${user.first_name}`}</UserName>
         </Wrapper>
     );
 }

@@ -1,4 +1,5 @@
 import { LOG_IN, LOG_OUT } from "constants/auth"
+import { USER_ONLINE } from "constants/user"
 import { getType } from "redux/actions"
 import { UserAction } from "redux/actions/user.action"
 
@@ -8,6 +9,7 @@ const initialState = {
     emailExist: "",
     createUser: false,
     infoUser: {},
+    userOnline: [],
 }
 
 const authReducer = (state = initialState, action) => {
@@ -21,6 +23,11 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoggedIn: false,
+            }
+        case USER_ONLINE:
+            return {
+                ...state,
+                userOnline: action.payload,
             }
         case getType(UserAction.postSignInSuccess):
             return {

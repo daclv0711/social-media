@@ -19,7 +19,7 @@ export const GlobalStyle = createGlobalStyle`
   --shadow-2: rgba(0, 0, 0, 0.3);
   --header-main: 2.4rem;
   --font-icons: 1.4rem;
-  --font-small: 0.975rem;
+  --font-small: 0.95rem;
   --border-radius-item: 0.5rem;
   --border-radius-main: 8px;
   --bottom-icons: -6px;

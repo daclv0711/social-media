@@ -3,12 +3,14 @@ import { baseUrl } from 'constants/api';
 import instance from './index';
 import { getLocalStorage } from 'utils/localStorage';
 
+const URL = `${baseUrl}/api`
+
 //auth
-export const signIn = (data) => axios.post(`${baseUrl}/auth/signin`, data);
+export const signIn = (data) => axios.post(`${URL}/auth/signin`, data);
 
-export const signUp = (data) => axios.post(`${baseUrl}/auth/signup`, data);
+export const signUp = (data) => axios.post(`${URL}/auth/signup`, data);
 
-export const signOut = () => axios.post(`${baseUrl}/auth/signout`, {
+export const signOut = () => axios.post(`${URL}/auth/signout`, {
     refreshToken: getLocalStorage('refreshToken')
 });
 
