@@ -2,9 +2,21 @@ import React from 'react';
 import { H3, Hr, Option, Wrapper } from './index.styles';
 import { listData } from './listContent';
 import ImgGroup from 'assets/images/group-img-1.jpg';
+import imgUser from 'assets/images/no-img.png';
+import { useSelector } from 'react-redux';
+import { infoUserState$ } from 'redux/selectors/user';
+
 function LeftMain() {
+
+    const user = useSelector(infoUserState$)
+    const { last_name, first_name, avatar } = user;
+
     return (
         <Wrapper>
+            <Option>
+                <img src={avatar || imgUser} alt={last_name} />
+                <div>{`${last_name} ${first_name}`}</div>
+            </Option>
             {
                 listData.map((item, index) => {
                     return (

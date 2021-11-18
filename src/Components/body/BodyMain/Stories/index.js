@@ -105,4 +105,4 @@ function Stories() {
     );
 }
 
-export default Stories;
+export default React.memo(Stories);

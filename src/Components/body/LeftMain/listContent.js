@@ -1,4 +1,3 @@
-import imgUser from 'assets/images/no-img.png';
 import friends from 'assets/images/friends.png';
 import group from 'assets/images/group.png';
 import memory from 'assets/images/memory.png';
@@ -7,11 +6,6 @@ import saved from 'assets/images/saved.png';
 import watch from 'assets/images/watch.png';
 
 export const listData = [
-    {
-        id: 1,
-        img: imgUser,
-        content: 'Name'
-    },
     {
         id: 2,
         img: friends,

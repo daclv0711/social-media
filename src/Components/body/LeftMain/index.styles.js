@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-    padding-left: 8px;
-    margin-top: 16px;
+    padding: 16px 0 0 8px;
     height: calc(100vh - var(--height-header));
     overflow: hidden;
     position: fixed;
@@ -13,14 +12,16 @@ export const Wrapper = styled.div`
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            margin-top: -16px;
-            background-color: #e5e7ea;
-            marfin-left: 16px;
         }
         ::-webkit-scrollbar-thumb {
             border-radius: 24px;
-            background: #CED0D4;
+            background: #BCC0C4;
         }
+    }
+    ::-webkit-scrollbar-track:hover {
+        background-color: #e4e4e4
+    }
+    ::-webkit-scrollbar-thumb:hover {
     }
 `
 
@@ -40,6 +41,7 @@ export const Option = styled.div`
     }
     div{
         padding: 10px 0;
+        text-transform: capitalize;
     }
     :hover {
         background-color: var(--gray-70);

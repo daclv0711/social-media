@@ -10,7 +10,7 @@ const style = {
     boxShadow: '0 1px 1px rgba(0,0,0,.15)',
     backgroundColor: 'var(--white)',
     position: 'fixed',
-    zIndex: '10',
+    zIndex: '100',
     width: '100%',
 }
 

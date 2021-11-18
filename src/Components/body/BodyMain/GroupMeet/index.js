@@ -80,4 +80,4 @@ function GroupMeet() {
     );
 }
 
-export default GroupMeet;
+export default React.memo(GroupMeet);

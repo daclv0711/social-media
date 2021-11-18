@@ -2,14 +2,31 @@ import { FileImageFilled, RedditOutlined, VideoCameraFilled } from '@ant-design/
 import React from 'react';
 import ImgUser from 'assets/images/no-img.png'
 import { Block, BlockImgUser, UserImg } from '../index.styles';
-import { Media, StatusInfo, StatusMedia } from './index.styles';
+import { Media, StatusMedia, StatusInfo } from './index.styles';
+import { useDispatch } from 'react-redux';
+import { showStatusModal, statusModalContent, statusModalTitle } from 'redux/actions/status.action';
+import FormStatus from '../FormStatus';
+
 
 function AddStatus(props) {
+    const dispatch = useDispatch();
+
+    const showModal = () => {
+        dispatch(showStatusModal())
+        dispatch(statusModalTitle('Tạo bài viết mới'))
+        dispatch(statusModalContent(<FormStatus />))
+    };
+
+    console.log(2)
     return (
         <Block>
             <BlockImgUser>
                 <UserImg src={ImgUser} alt="user" />
-                <StatusInfo>Bạn đang nghĩ gì?</StatusInfo>
+                <StatusInfo
+                    onClick={showModal}
+                >Bạn đang nghĩ gì?</StatusInfo>
+                {/* Modal */}
+
             </BlockImgUser>
             <StatusMedia>
                 <Media>
@@ -29,4 +46,4 @@ function AddStatus(props) {
     );
 }
 
-export default AddStatus;
+export default React.memo(AddStatus);

@@ -1,0 +1,9 @@
+export const isLoggedInState$ = state => state.user.isLoggedIn;
+
+export const passwordWrongState$ = state => state.user.passwordWrong;
+
+export const emailExistState$ = state => state.user.emailExist;
+
+export const createUserState$ = state => state.user.createUser;
+
+export const infoUserState$ = state => state.user.infoUser;

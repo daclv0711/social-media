@@ -41,4 +41,4 @@ function Comments(props) {
     );
 }
 
-export default Comments;
+export default React.memo(Comments);

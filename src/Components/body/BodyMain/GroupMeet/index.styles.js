@@ -12,7 +12,7 @@ export const BlockMeet = styled.div`
     gap: 0.8rem;
     position: relative;
     right: 0;
-    transition: right 0.6s ease;
+    transition: right 0.3s linear;
 `;
 
 export const MeetCreate = styled.div`

@@ -1,13 +1,14 @@
 import React from 'react';
 import ImgUser from 'assets/images/no-img.png'
-import { Wrapper, UserImg, UserOnline, UserName } from './index.styles';
+import { Wrapper, UserName } from './index.styles';
+import { Avatar, Badge } from 'antd';
 
 function Contacts(props) {
     return (
         <Wrapper>
-            <UserOnline>
-                <UserImg src={ImgUser} alt='user' />
-            </UserOnline>
+            <Badge dot offset={[-4, 27]} style={{ backgroundColor: 'green' }}>
+                <Avatar src={ImgUser} size={32} />
+            </Badge>
             <UserName>Name</UserName>
         </Wrapper>
     );

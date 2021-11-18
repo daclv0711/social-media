@@ -14,14 +14,14 @@ export const Wrapper = styled.div`
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background-color: #e5e7ea;
         }
         ::-webkit-scrollbar-thumb {
             border-radius: 20px;
-            background: #CED0D4;
+            background:#BCC0C4 ;
         }
     }
     ::-webkit-scrollbar-track:hover {
+        background-color: #e4e4e4;
     }
     ::-webkit-scrollbar-thumb:hover {
     }

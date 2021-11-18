@@ -13,6 +13,10 @@ export const HeaderTitle = styled.div`
     position: relative;
     font-size: var(--font-icons);
     color: ${props => props.theme.target};
+    cursor: pointer;
+    span {
+        font-size: var(--font-icons);
+    }
     ::after {
         content: '';
         bottom: var(--bottom-icons);
@@ -24,7 +28,6 @@ export const HeaderTitle = styled.div`
         left: 0;
     }
     :hover {
-        cursor: ${props => props.theme.target ? '' : 'pointer'};
         background-color: ${props => props.theme.target ? '' : 'var(--gray)'};
     }
 `

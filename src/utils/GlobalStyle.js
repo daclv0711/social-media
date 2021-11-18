@@ -6,7 +6,7 @@ export const GlobalStyle = createGlobalStyle`
   --width-block-main: 500px; 
   --white: #fff;
   --black: #000;
-  --bodyGrey: #F0F2F5;
+  --grey-body: #F0F2F5;
   --gray: #efefef;
   --lightGray: #E4E6EB;
   --gray-70: rgba(229, 231, 235, 1);
@@ -18,41 +18,25 @@ export const GlobalStyle = createGlobalStyle`
   --shadow-1: rgba(0, 0, 0, 0.1);
   --shadow-2: rgba(0, 0, 0, 0.3);
   --header-main: 2.4rem;
-  --font-icons: 1.5rem;
+  --font-icons: 1.4rem;
+  --font-small: 0.975rem;
   --border-radius-item: 0.5rem;
   --border-radius-main: 8px;
   --bottom-icons: -6px;
   --height-header: 56px;
   --mg-bottom-main: 1rem;
-  --hover-device: ':hover';
 }
 * {
-    box-sizing: border-box;
     font-family: 'Abel', sans-serif;  
   }
   
   body {  
-    margin: 0;
     padding: 0;
-    background-color: var(--bodyGrey);
-    h1 {
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--white);
-    }
-  
-    h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-  
-    p {
-      font-size: 1rem;
-      color: var(--white);
-    }
+    background-color: var(--grey-body);
+
     @media screen and (max-width: 1440px) {
-        --font-icons: 1.2rem;
-        --bottom-icons: -9px;
+        --bottom-icons: -7px;
+        --header-main: 2rem;
     }
     @media screen and (max-width: 1024px) {
         --font-icons: 1rem;
@@ -60,6 +44,7 @@ export const GlobalStyle = createGlobalStyle`
         --header-main: 1.6rem;
         --width-body-main: 500px;
         --width-block-main: 400px;
+        --header-main: 1.6rem;
     }
     @media screen and (max-width: 768px) {
       --font-icons: 1rem;
@@ -75,7 +60,6 @@ export const GlobalStyle = createGlobalStyle`
         --width-block-main: 100%;
         --header-main: 1.2rem;
         --border-radius-main: 0;
-
     }
   }
   `;
