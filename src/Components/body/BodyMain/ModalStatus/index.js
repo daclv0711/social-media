@@ -7,7 +7,6 @@ import { StatusTitle } from './index.styles';
 
 
 function ModalStatus(props) {
-    console.log('modal Status')
 
     const dispatch = useDispatch();
     const showModalStatus = useSelector(modalStatusState$)

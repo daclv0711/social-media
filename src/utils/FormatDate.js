@@ -27,5 +27,5 @@ export const FormatFullDate = (data) => {
     if (minute < 10) {
         return `${day}, ${date} ${month} ${year} ${hour}:0${minute}`
     }
-    return `${day}, ${date} ${month} ${year} lúc ${hour}:${minute}`
+    return `${day}, ${date} ${month} ${year} ${hour}:${minute}`
 }

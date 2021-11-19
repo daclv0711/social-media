@@ -13,7 +13,7 @@ import { loadingState$ } from 'redux/selectors/loading';
 function FormStatus(props) {
     const { data } = props;
     const { Option } = SelectObject;
-    const { handleSubmit, control, reset } = useForm();
+    const { handleSubmit, control, reset, formState: { errors } } = useForm();
     //user info
     const dispatch = useDispatch();
     const user = useSelector(infoUserState$);
@@ -22,20 +22,21 @@ function FormStatus(props) {
     const { last_name, first_name, avatar } = user;
 
     const handleSubmitStatus = dataForm => {
-        if (data && data._id) {
-            console.log(dataForm);
-            if (dataForm.status !== data.status) {
-                dispatch(StatusAction.updateStatusRequest({
-                    ...data,
-                    status: dataForm.status
-                }))
+        if (dataForm.status.trim() !== '') {
+            if (data && data._id) {
+                if (dataForm.status !== data.status) {
+                    dispatch(StatusAction.updateStatusRequest({
+                        ...data,
+                        status: dataForm.status
+                    }))
+                }
+            } else {
+                dispatch(StatusAction.postStatusRequest(dataForm));
+                reset({
+                    status: '',
+                    select: 'global'
+                });
             }
-        } else {
-            dispatch(StatusAction.postStatusRequest(dataForm));
-            reset({
-                status: '',
-                select: 'global'
-            });
         }
     }
     return (
@@ -89,10 +90,10 @@ function FormStatus(props) {
                 type='textarea'
                 control={control}
                 name='status'
-                defaultValue={data?.status}
                 rules={{ required: true }}
                 autoSize={{ minRows: 1, maxRows: 6 }}
                 allowClear={true}
+                defaultValue={data?.status}
             />
             <Button
                 type='primary'

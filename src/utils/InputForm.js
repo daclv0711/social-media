@@ -21,7 +21,7 @@ export const InputForm = (props) => {
                     ((props.type === 'textarea') ?
                         <Input.TextArea
                             onChange={onChange}
-                            defaultValue={props.defaultValue || value}
+                            defaultValue={value || props.defaultValue}
                             placeholder={props.placeholder}
                             size='large'
                             type={props.type}

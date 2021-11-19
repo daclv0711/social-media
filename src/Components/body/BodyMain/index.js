@@ -20,7 +20,6 @@ function BodyMain(props) {
 
     const post = useMemo(() => {
         const arr = [];
-        console.log('1', statusAll);
         statusAll.forEach(sta => {
             const user = allUser.find(user => user._id === sta.user_id);
             if (user) {
@@ -43,7 +42,7 @@ function BodyMain(props) {
         })
         return arr;
     }, [statusAll, allUser])
-    // console.log(post);
+    console.log(post);
     return (
         <Wrapper>
             <ModalStatus />

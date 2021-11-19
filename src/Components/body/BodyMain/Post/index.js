@@ -32,7 +32,7 @@ function Post({ status }) {
                 <NameUser>
                     <div className='user-name'>{`${status.lastName} ${status.firstName}`}</div>
                     <PostTime>
-                        <Tooltip title={FormatFullDate(status.createdAt)} placement="bottom" style={{ borderRadius: 16 }}>
+                        <Tooltip title={FormatFullDate(status.createdAt)} placement="bottom">
                             <div>{FormatDate(status.createdAt)}</div>
                         </Tooltip>
                         <div>.</div>

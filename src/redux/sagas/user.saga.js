@@ -39,6 +39,7 @@ export const signOutSaga = function* () {
         yield put(UserAction.postSignOutSuccess(out.data));
         yield setLocalStorage("accessToken", "");
         yield setLocalStorage("refreshToken", "");
+        yield socket.disconnect();
     } catch (error) {
         yield put(UserAction.postSignOutFailure(error.response.data.message));
     }
