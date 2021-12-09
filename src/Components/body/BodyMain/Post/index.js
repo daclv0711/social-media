@@ -4,24 +4,31 @@ import ImgUser from 'assets/images/no-img.png';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { StatusAction } from 'redux/actions/status.action';
+import { loadingState$ } from 'redux/selectors/loading';
 import { infoUserState$ } from 'redux/selectors/user';
 import { FormatDate, FormatFullDate } from 'utils/FormatDate';
 import { Block, BlockImgUser, BorderImg, UserImg } from '../index.styles';
 // import AddComment from './AddComment';
 // import Comments from './Comments';
 import { Action, NameUser, PostAddComment, PostContent, PostHashtag, PostReaction, PostStatus, PostTime, PostUserInfo } from './index.styles';
-import PostEdit from './PostEdit';
+import PostOptionStatus from './PostOptionStatus';
 
 function Post({ status }) {
-    console.log('post', status.createdAt)
+    // console.log('post', status.createdAt)
 
     const dispatch = useDispatch();
 
     const user = useSelector(infoUserState$)
 
+    const loading = useSelector(loadingState$)
+
     const hanldeClickLike = (id) => {
-        dispatch(StatusAction.likeStatusRequest({ status_id: id }))
+        if(!loading){
+            dispatch(StatusAction.likeStatusRequest({ status_id: id }))
+        }
     }
+
+    
     return (
         <Block>
             <PostUserInfo>
@@ -40,7 +47,7 @@ function Post({ status }) {
                     </PostTime>
                 </NameUser>
                 {/* Post edit */}
-                <PostEdit status={status} />
+                <PostOptionStatus status={status} />
 
             </PostUserInfo>
             <PostContent>

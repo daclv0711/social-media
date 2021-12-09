@@ -1,18 +1,22 @@
 import styled from "styled-components";
 import { Flex } from "utils/FlexStyles";
-
+import { Form } from "antd"
 export const UserName = styled(Flex)`
     gap: 1rem;
     width: 100%;
     justify-content: space-between;
 `;
 
-export const FormRegister = styled.form`
+export const FormRegister = styled(Form)`
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     gap: 1rem;
+    .ant-form-item {
+        margin-bottom: 0;
+        width: 100%;
+    }
     input, span {
         border-radius: 6px;
         input {
@@ -44,6 +48,6 @@ export const Email = styled.div`
 export const Password = styled(Email)``;
 
 export const Error = styled.div`
-    color: red;
+    color: #ff4d4f;
     align-self: start;
 `;

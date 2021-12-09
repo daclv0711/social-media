@@ -2,13 +2,14 @@ import { Input } from 'antd';
 import React from 'react';
 import { Controller } from 'react-hook-form';
 
-export const InputForm = (props) => {
+const InputForm = (props) => {
 
     return (
         <Controller
             name={props.name}
             control={props.control}
             rules={props.rules}
+            defaultValue={props.defaultValue}
             render={({ field: { onChange, value } }) => (
                 (props.type === "password") ?
                     <Input.Password
@@ -21,11 +22,11 @@ export const InputForm = (props) => {
                     ((props.type === 'textarea') ?
                         <Input.TextArea
                             onChange={onChange}
-                            defaultValue={value || props.defaultValue}
+                            value={value}
                             placeholder={props.placeholder}
                             size='large'
+                            defaultValue={props.defaultValue}
                             type={props.type}
-                            bordered={false}
                             autoSize={props.autoSize}
                             allowClear={props.allowClear}
                             style={props.style}
@@ -43,3 +44,5 @@ export const InputForm = (props) => {
         />
     );
 }
+
+export default React.memo(InputForm)

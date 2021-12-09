@@ -8,6 +8,7 @@ function MainNav(props) {
     const theme = {
         target: 'var(--blue)'
     }
+
     return (
         <Wrapper ref={mainRef}>
             <Tooltip title="Trang chủ" placement="bottom">

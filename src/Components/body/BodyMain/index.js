@@ -58,4 +58,4 @@ function BodyMain(props) {
     );
 }
 
-export default BodyMain;
+export default React.memo(BodyMain);

@@ -10,10 +10,11 @@ const style = {
 }
 
 function Main(props) {
+
     return (
         <Row style={style}>
             <Col md={5} xs={0}>
-                <LeftMain />
+                <LeftMain user={props.user} />
             </Col>
             <Col md={14} xs={24}>
                 <BodyMain />

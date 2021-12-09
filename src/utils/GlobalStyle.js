@@ -28,12 +28,21 @@ export const GlobalStyle = createGlobalStyle`
 }
 * {
     font-family: 'Abel', sans-serif;  
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+    }
+    ::-webkit-scrollbar-thumb {
+        border-radius: 24px;
+        background: #878889;
+    }
   }
   
   body {  
     padding: 0;
     background-color: var(--grey-body);
-
+    
     @media screen and (max-width: 1440px) {
         --bottom-icons: -7px;
         --header-main: 2rem;

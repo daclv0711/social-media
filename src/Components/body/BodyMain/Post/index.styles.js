@@ -25,16 +25,6 @@ export const NameUser = styled(FlexDir)`
     }
 `;
 
-export const PostOptions = styled(FlexAll)`
-    font-size: 1.2rem;
-    cursor: pointer;
-    padding: 0.4rem;
-    border-radius: 50%;
-    :hover {
-        background-color: var(--gray);
-    }
-`;
-
 export const PostTime = styled(Flex)`
     align-items: center;
     gap: 0.3rem;

@@ -1,12 +1,14 @@
 import styled from "styled-components";
 import { Flex } from 'utils/FlexStyles';
-import { Select } from 'antd';
+import { Select, Form } from 'antd';
 
-export const StatusForm = styled.form`
+export const StatusForm = styled(Form)`
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
-    
+    .ant-form-item {
+        margin-bottom: 0;
+    }
     textarea {
         padding: 12px 0;
         font-size: 1.6rem;

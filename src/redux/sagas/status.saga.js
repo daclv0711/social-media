@@ -16,11 +16,13 @@ export const getStatusSaga = function* () {
 
 export const likeStatusSaga = function* ({ payload }) {
     try {
+        yield put(showLoading())
         const status = yield call(likeStatus, payload);
         yield put(StatusAction.updateStatusSuccess(status.data));
     } catch (error) {
         yield put(StatusAction.updateStatusFailure(error));
     }
+    yield put(hiddenLoading())
 }
 
 export const postStatusSaga = function* ({ payload }) {

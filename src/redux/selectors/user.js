@@ -1,4 +1,3 @@
-export const isLoggedInState$ = state => state.user.isLoggedIn;
 
 export const passwordWrongState$ = state => state.user.passwordWrong;
 

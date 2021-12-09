@@ -28,8 +28,8 @@ export const Wrapper = styled.div`
 export const Option = styled.div`
     display: flex;
     align-items: center;
-    padding: 0 6px;
-    gap: 8px;
+    padding: 0 12px;
+    gap: 4px;
     font-size: 0.9375rem;
     font-weight: 600;
     border-radius: var(--border-radius-item);
@@ -40,7 +40,7 @@ export const Option = styled.div`
         border-radius: 50%;
     }
     div{
-        padding: 10px 0;
+        padding: 4px;
         text-transform: capitalize;
     }
     :hover {

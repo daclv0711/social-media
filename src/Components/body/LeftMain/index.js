@@ -6,7 +6,7 @@ import imgUser from 'assets/images/no-img.png';
 import { useSelector } from 'react-redux';
 import { infoUserState$ } from 'redux/selectors/user';
 
-function LeftMain() {
+function LeftMain(props) {
 
     const user = useSelector(infoUserState$)
     const { last_name, first_name, avatar } = user;

@@ -18,7 +18,7 @@ function EndNav(props) {
     }
     const menu = (
 
-        <MenuAccount>
+        <MenuAccount >
             <MenuAccount.Item key='1'>
                 <ProfileUser>
                     <Avatar src={avatar || ImgUser} size={60} />
@@ -64,8 +64,10 @@ function EndNav(props) {
             </Col>
             <Col>
                 <Tooltip title="Tài khoản" placement="bottom">
-                    <Dropdown overlay={menu} trigger={['click']}>
-                        <EndHeader><CaretDownOutlined /></EndHeader>
+                    <Dropdown getPopupContainer={(triggerNode) => triggerNode} overlay={menu} trigger={['click']}>
+                        <EndHeader>
+                            <CaretDownOutlined />
+                        </EndHeader>
                     </Dropdown>
                 </Tooltip>
             </Col>

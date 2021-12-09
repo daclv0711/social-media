@@ -1,18 +1,5 @@
-import { LOG_IN, LOG_OUT } from "constants/auth"
 import { USER_ONLINE } from "constants/user"
 import { createActions } from "redux-actions"
-
-export const LogIn = () => {
-    return {
-        type: LOG_IN,
-    }
-}
-
-export const Logout = () => {
-    return {
-        type: LOG_OUT,
-    }
-}
 
 export const getUserOnline = (payload) => {
     return {
