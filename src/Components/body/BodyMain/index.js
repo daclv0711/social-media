@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
-import { Wrapper } from './index.styles';
+import { Wrapper, Block, PostSuccess } from './index.styles';
 // import Stories from './Stories';
 import AddStatus from './AddStatus';
 import Post from './Post';
@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { StatusAction } from 'redux/actions/status.action';
 import ModalStatus from './ModalStatus';
 import { CommentActions } from 'redux/actions/comment.action';
+import { CheckCircleTwoTone } from '@ant-design/icons';
 
 function BodyMain(props) {
     const dispatch = useDispatch()
@@ -46,6 +47,7 @@ function BodyMain(props) {
         })
         return arr;
     }, [statusAll, allUser])
+
     return (
         <Wrapper>
             <ModalStatus />
@@ -55,8 +57,20 @@ function BodyMain(props) {
             {
                 post.map(status => <Post key={status._id} status={status} />)
             }
-            <Loading />
-            <Loading />
+            {
+                post.length > 0 ?
+                    <Block>
+                        <PostSuccess>
+                            <CheckCircleTwoTone twoToneColor="#52c41a" />
+                            <div>Bạn đã xem hết bài viết.</div>
+                        </PostSuccess>
+                    </Block>
+                    :
+                    <>
+                        <Loading />
+                        <Loading />
+                    </>
+            }
         </Wrapper>
     );
 }

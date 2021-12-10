@@ -70,3 +70,9 @@ export const BlockImgUser = styled(Flex)`
 export const BorderImg = styled(Blur)`
     border-radius: 50%;
 `;
+
+export const PostSuccess = styled(FlexAll)`
+    font-size: 1.5rem;
+    font-weight: 600;
+    gap: 0.5rem;
+`;
