@@ -4,7 +4,6 @@ const Month = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Thá
 export const FormatDate = (date) => {
     let d = Date.now() - (new Date(date))
     let h = Math.floor(d / 1000)
-    console.log(h)
     if (h < 60) {
         return `Vừa xong`
     } else if (h < 3600) {

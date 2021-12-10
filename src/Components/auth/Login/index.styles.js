@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { FlexDir } from "utils/FlexStyles";
-
+import { Form } from "antd";
 export const Wrapper = styled(FlexDir)`
     width: 400px;
     background: var(--white);
@@ -19,13 +19,17 @@ export const Wrapper = styled(FlexDir)`
     }
 `;
 
-export const FormLogin = styled.form`
+export const FormLogin = styled(Form)`
     width: 100%;
     display: flex;
     gap: 1rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    .ant-form-item {
+        margin-bottom: 0;
+        width: 100%;
+    }
     input, span {
         border-radius: 6px;
         input {

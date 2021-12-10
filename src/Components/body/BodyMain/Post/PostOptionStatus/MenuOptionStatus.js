@@ -1,16 +1,14 @@
+import { Button, Divider, Menu, Modal, Tooltip } from 'antd';
+import FormStatus from 'Components/body/BodyMain/FormStatus';
 import React from 'react';
-import { Menu, Dropdown, Modal, Button, Tooltip, Divider } from 'antd';
-import { PostOptions } from '../index.styles.js'
-import { EllipsisOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { showStatusModal, StatusAction, statusModalContent, statusModalTitle } from 'redux/actions/status.action.js';
-import FormStatus from '../../FormStatus/index.js';
-import { FormatDate, FormatFullDate } from 'utils/FormatDate.js';
-import { ListOldStatus, TitleModal } from './index.styles.js';
+import { showStatusModal, StatusAction, statusModalContent, statusModalTitle } from 'redux/actions/status.action';
 import { infoUserState$ } from 'redux/selectors/user';
+import { FormatDate, FormatFullDate } from 'utils/FormatDate';
+import { ListOldStatus, TitleModal } from './index.styles';
 
-function PostEdit({ status }) {
-
+function MenuOptionStatus({status}) {
+    
     const dispatch = useDispatch();
     const [visible, setVisible] = React.useState(false);
     const user = useSelector(infoUserState$)
@@ -33,8 +31,8 @@ function PostEdit({ status }) {
         setVisible(true);
     }
 
-    const menu = (
-        <Menu>
+    return (
+        <>
             {
                 user._id === status.user_id &&
                 <>
@@ -74,17 +72,8 @@ function PostEdit({ status }) {
                     })
                 }
             </Modal>
-
-        </Menu>
+        </>
     )
-    return (
-        <Dropdown overlay={menu} trigger={['click']} placement="bottomRight">
-            <PostOptions>
-                <EllipsisOutlined />
-            </PostOptions>
-
-        </Dropdown>
-    );
 }
 
-export default React.memo(PostEdit);
+export default React.memo(MenuOptionStatus);

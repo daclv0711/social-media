@@ -3,7 +3,7 @@ import { baseUrl } from 'constants/api';
 import { getLocalStorage, setLocalStorage } from 'utils/localStorage';
 
 const instance = axios.create({
-    baseURL: `${baseUrl}/api`,
+    baseURL: baseUrl,
     timeout: 20000,
     headers: {
         'Content-Type': 'application/json'
@@ -22,10 +22,17 @@ instance.interceptors.response.use((response) => {
             const { config } = error.response;
             config.headers['Authorization'] = `Bearer ${token}`;
             return instance(config);
+        }).catch(err => {
+            console.log(err.response);
+            if (err.response.data.message === 'Invalid token' && err.response.data.code === 400) {
+                setLocalStorage('refreshToken', '');
+                setLocalStorage('accessToken', '');
+                window.location.href = '/';
+            }
         })
 
     }
-    return error;
+    return Promise.reject(error);
 });
 
 export default instance;

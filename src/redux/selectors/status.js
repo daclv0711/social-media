@@ -7,3 +7,9 @@ export const modalContentState$ = state => state.status.modalContent;
 export const modalTitleState$ = state => state.status.title;
 
 export const allUsersState$ = state => state.status.allUsers;
+
+export const loadingInputState$ = state => state.status.loadingInput;
+
+//notification
+
+export const notifyStatusState$ = state => state.notify.notifyStatus;

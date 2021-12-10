@@ -1,33 +1,21 @@
-import { LOG_IN, LOG_OUT } from "constants/auth"
 import { USER_ONLINE } from "constants/user"
 import { getType } from "redux/actions"
 import { UserAction } from "redux/actions/user.action"
 
 const initialState = {
-    isLoggedIn: false,
     passwordWrong: "",
     emailExist: "",
     createUser: false,
-    infoUser: {},
+    infoUser: null,
     userOnline: [],
 }
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOG_IN:
-            return {
-                ...state,
-                isLoggedIn: true,
-            }
-        case LOG_OUT:
-            return {
-                ...state,
-                isLoggedIn: false,
-            }
         case USER_ONLINE:
             return {
                 ...state,
-                userOnline: action.payload,
+                userOnline: action.payload.filter(user => user._id !== state.infoUser?._id),
             }
         case getType(UserAction.postSignInSuccess):
             return {
@@ -50,11 +38,6 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 emailExist: action.payload,
                 createUser: false,
-            }
-        case getType(UserAction.postSignOutSuccess):
-            return {
-                ...state,
-                isLoggedIn: false,
             }
         case getType(UserAction.postSignOutFailure):
             return {

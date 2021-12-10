@@ -1,0 +1,1 @@
+export const listCommentsState$ = (state) => state.comment.comments;

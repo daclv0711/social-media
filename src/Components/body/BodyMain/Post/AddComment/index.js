@@ -1,33 +1,73 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { BlockImgUser, BorderImg, UserImg } from '../../index.styles';
-import { Wrapper } from './index.styles';
+import { FormAddComment } from './index.styles';
 import ImgUser from 'assets/images/no-img.png'
-import { InputForm } from 'utils/InputForm';
-import { useForm } from 'react-hook-form';
+import { Input } from 'antd';
+import { CommentActions } from 'redux/actions/comment.action';
+import { useDispatch } from 'react-redux';
+import { socket } from 'constants/socket.io';
 
-function AddComment(props) {
+function AddComment({ statusId }) {
+    const [form] = FormAddComment.useForm();
+    const dispatch = useDispatch();
 
-    const { handleSubmit, control } = useForm();
-
+    const inputRef = useRef(null);
+    // useImperativeHandle(ref, () => ({
+    //     focusInput() {
+    //         inputComment.current.focus();
+    //     }
+    // }));
+    useEffect(() => {
+        inputRef.current.focus();
+    }, [])
     const handleSubmitComment = (data) => {
-        console.log(data);
+        dispatch(CommentActions.createCommentRequest({
+            _id: statusId,
+            data: {
+                ...data,
+                statusId,
+            }
+        }));
+        form.resetFields();
+        socket.emit('blur-comment', statusId);
     }
 
+    const handleOnpressEnter = (e) => {
+        e.preventDefault();
+        form.submit();
+    }
+    const handleFocus = () => {
+        socket.emit('focus-comment', statusId);
+    }
+    const handleBlur = () => {
+        socket.emit('blur-comment', statusId);
+    }
     return (
-        <Wrapper onSubmit={handleSubmit(handleSubmitComment)} >
+        <FormAddComment
+            onFinish={handleSubmitComment}
+            autoComplete="off"
+            form={form}
+        >
             <BlockImgUser>
                 <UserImg src={ImgUser} alt='user' />
                 <BorderImg />
             </BlockImgUser>
-            <InputForm
-                type='textarea'
-                placeholder='Viết bình luận...'
+            <FormAddComment.Item
                 name='comment'
-                rules={{ required: true }}
-                control={control}
-                autoSize={true}
-            />
-        </Wrapper>
+                rules={[{ required: true, message: '' }]}
+            >
+                <Input.TextArea
+                    ref={inputRef}
+                    placeholder='Viết bình luận...'
+                    rules={{ required: true }}
+                    autoSize={true}
+                    bordered={false}
+                    onPressEnter={handleOnpressEnter}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                />
+            </FormAddComment.Item>
+        </FormAddComment>
     );
 }
 

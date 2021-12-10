@@ -1,27 +1,59 @@
 import { EnvironmentOutlined, LikeFilled, LikeOutlined, MessageOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import ImgUser from 'assets/images/no-img.png';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { StatusAction } from 'redux/actions/status.action';
+import { listCommentsState$ } from 'redux/selectors/comment';
+import { loadingState$ } from 'redux/selectors/loading';
 import { infoUserState$ } from 'redux/selectors/user';
 import { FormatDate, FormatFullDate } from 'utils/FormatDate';
 import { Block, BlockImgUser, BorderImg, UserImg } from '../index.styles';
-// import AddComment from './AddComment';
-// import Comments from './Comments';
-import { Action, NameUser, PostAddComment, PostContent, PostHashtag, PostReaction, PostStatus, PostTime, PostUserInfo } from './index.styles';
-import PostEdit from './PostEdit';
+import AddComment from './AddComment';
+import Comments from './Comments';
+import { Action, NameUser, PostAddComment, PostContent, PostHashtag, PostLodingInput, PostReaction, PostStatus, PostTime, PostUserInfo } from './index.styles';
+import PostOptionStatus from './PostOptionStatus';
+import { allUsersState$, loadingInputState$ } from 'redux/selectors/status';
+import Loading from 'assets/images/loading.gif';
 
 function Post({ status }) {
-    console.log('post', status.createdAt)
-
+    const [showComment, setShowComment] = React.useState(false);
     const dispatch = useDispatch();
 
     const user = useSelector(infoUserState$)
 
+    const loading = useSelector(loadingState$)
+
+    const allUser = useSelector(allUsersState$)
+
+    const loadingInput = useSelector(loadingInputState$)
     const hanldeClickLike = (id) => {
-        dispatch(StatusAction.likeStatusRequest({ status_id: id }))
+        if (!loading) {
+            dispatch(StatusAction.likeStatusRequest({ status_id: id }))
+        }
     }
+    const comments = useSelector(listCommentsState$)
+
+    const dataComment = useMemo(() => {
+        const arr = [];
+        comments.forEach(comment => {
+            const userComment = allUser.find(user => user._id === comment.user_id)
+            if (userComment) {
+                arr.push({
+                    ...comment,
+                    userName: `${userComment.last_name} ${userComment.first_name}`,
+                    avatar: userComment.avatar,
+                })
+            }
+
+        })
+        return arr.filter(comment => comment.status_id === status._id)
+    }, [comments, status._id, allUser])
+
+    const handleClickComment = () => {
+        setShowComment(true)
+    }
+
     return (
         <Block>
             <PostUserInfo>
@@ -40,7 +72,7 @@ function Post({ status }) {
                     </PostTime>
                 </NameUser>
                 {/* Post edit */}
-                <PostEdit status={status} />
+                <PostOptionStatus status={status} />
 
             </PostUserInfo>
             <PostContent>
@@ -58,28 +90,44 @@ function Post({ status }) {
                         </div>
                         : <div></div>
                 }
-
-                <div className='comment-count'>0 Bình luận</div>
+                {
+                    dataComment.length > 0 && <div className='comment-count' onClick={() => setShowComment(!showComment)}>{dataComment.length} Bình luận</div>
+                }
             </PostStatus>
             <PostReaction>
                 <Action onClick={() => hanldeClickLike(status._id)} colors={status.likes.includes(user._id)}>
                     <LikeOutlined />
                     <div>Thích</div>
                 </Action>
-                <Action>
+                <Action onClick={() => handleClickComment()}>
                     <MessageOutlined />
                     <div>Bình luận</div>
                 </Action>
             </PostReaction>
+            {
+                showComment &&
+                <>
+                    <AddComment statusId={status._id} />
+                    {
+                        dataComment.map(comment => <Comments key={comment._id} comment={comment} />)
+                    }
+
+                </>
+            }
+            {
+                loadingInput === status._id &&
+                <PostLodingInput >
+                    <img src={Loading} alt='loading' />
+                    <div>Ai đó đang nhập...</div>
+                </PostLodingInput>
+            }
             {/* <Sort>
                 <div>Phù hợp nhất</div>
                 <CaretDownOutlined />
             </Sort>
-            <AddComment />
-            <Comments />
             <Comments />
             <Comments /> */}
-            <PostAddComment>Viết bình luận...</PostAddComment>
+            <PostAddComment onClick={() => setShowComment(true)}>Viết bình luận...</PostAddComment>
         </Block>
     );
 }

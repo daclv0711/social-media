@@ -1,25 +1,19 @@
 import styled from "styled-components";
 import { Flex } from "utils/FlexStyles";
-import { PostOptions } from "../index.styles";
+// import { PostOptions } from "../index.styles";
 
 export const PostComment = styled(Flex)`
     position: relative;
     align-items: start;
     gap: 0.6rem;
     margin-bottom: 0.8rem;
-    ${PostOptions} {
-        opacity: 0;
-    }
-    :hover {
-        ${PostOptions} {
-            opacity: 1;
-        }
-    }
+  
 `;
 
 export const Comment = styled(Flex)`
     gap: 0.2rem;
     align-items:center;
+    margin-bottom: 0.4rem;
     .comment-info {
         background-color: var(--gray);
         border-radius: 1rem;
@@ -44,6 +38,7 @@ export const Comment = styled(Flex)`
         width: fit-content;
         cursor: pointer;
         font-size: 0.8rem;
+        text-transform: capitalize;
         font-weight: bold;
         :hover, :active {
             text-decoration: underline;

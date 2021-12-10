@@ -18,6 +18,7 @@ export const GlobalStyle = createGlobalStyle`
   --shadow-1: rgba(0, 0, 0, 0.1);
   --shadow-2: rgba(0, 0, 0, 0.3);
   --header-main: 2.4rem;
+  --background-color-menu: #fffcfc;
   --font-icons: 1.4rem;
   --font-small: 0.95rem;
   --border-radius-item: 0.5rem;
@@ -28,12 +29,21 @@ export const GlobalStyle = createGlobalStyle`
 }
 * {
     font-family: 'Abel', sans-serif;  
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+    }
+    ::-webkit-scrollbar-thumb {
+        border-radius: 24px;
+        background: #878889;
+    }
   }
   
   body {  
     padding: 0;
     background-color: var(--grey-body);
-
+    
     @media screen and (max-width: 1440px) {
         --bottom-icons: -7px;
         --header-main: 2rem;

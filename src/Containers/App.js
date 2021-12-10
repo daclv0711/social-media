@@ -3,18 +3,26 @@ import { Routes, Route } from "react-router-dom";
 import Header from 'Containers/Header';
 import { GlobalStyle } from 'utils/GlobalStyle';
 import Auth from './Auth';
-import { useSelector } from 'react-redux';
-import { isLoggedInState$ } from 'redux/selectors/user';
 import NotFound from './NotFound';
+import { useDispatch, useSelector } from 'react-redux';
+import { UserAction } from 'redux/actions/user.action';
+import { infoUserState$ } from 'redux/selectors/user';
+import { useEffect } from 'react';
+import { getLocalStorage } from 'utils/localStorage';
 function App() {
 
-  const isLoggin = useSelector(isLoggedInState$)
-
+  const user = useSelector(infoUserState$)
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if ((!user?._id && getLocalStorage('refreshToken'))) {
+      dispatch(UserAction.getUserRequest());
+    }
+  }, [dispatch, user?._id])
   return (
     <>
-      {isLoggin && <Header />}
+      {user && <Header />}
       <Routes>
-        <Route path="/" element={isLoggin ? <Main /> : <Auth />} />
+        <Route path="/" element={user ? <Main user={user} /> : <Auth />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <GlobalStyle />

@@ -8,6 +8,7 @@ function MainNav(props) {
     const theme = {
         target: 'var(--blue)'
     }
+
     return (
         <Wrapper ref={mainRef}>
             <Tooltip title="Trang chủ" placement="bottom">
@@ -21,14 +22,14 @@ function MainNav(props) {
             </Tooltip>
             <Tooltip title="Marketplace" placement="bottom">
                 <HeaderTitle >
-                    <Badge count={100} offset={[8, 0]}>
+                    <Badge count={100} offset={[8, 0]} size='small' >
                         <ShopOutlined />
                     </Badge>
                 </HeaderTitle>
             </Tooltip>
             <Tooltip title="Nhóm" placement="bottom">
-                <HeaderTitle >
-                    <Badge count={100} offset={[8, 0]}>
+                <HeaderTitle>
+                    <Badge count={100} offset={[8, 0]} size='small'>
                         <GlobalOutlined />
                     </Badge>
                 </HeaderTitle>

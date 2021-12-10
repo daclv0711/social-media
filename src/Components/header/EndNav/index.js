@@ -1,42 +1,60 @@
-import { BellFilled, CaretDownOutlined, CommentOutlined, LogoutOutlined } from '@ant-design/icons';
-import React from 'react';
-import { EndHeader, MenuAccount, ProfileItem, ProfileUser, User } from './index.styles';
+import { BellFilled, CaretDownOutlined, WechatOutlined } from '@ant-design/icons';
+import React, { useMemo } from 'react';
+import { EndHeader, MenuOption, User } from './index.styles';
 import ImgUser from 'assets/images/no-img.png';
-import { Avatar, Col, Dropdown, Row, Tooltip } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
+import { Avatar, Badge, Col, Dropdown, Row, Tooltip } from 'antd';
+import { useSelector } from 'react-redux';
 import { infoUserState$ } from 'redux/selectors/user';
-import { UserAction } from 'redux/actions/user.action';
+import MenuOptionChat from './MenuOptionChat';
+import MenuOptionNotify from './MenuOptionNotify';
+import MenuOptionAccount from './MenuOptionAccount';
+import { notifyStatusState$, allUsersState$ } from 'redux/selectors/status';
 
 function EndNav(props) {
 
     const user = useSelector(infoUserState$)
-    const { first_name, last_name, avatar } = user;
-    const dispatch = useDispatch();
+    const { last_name, avatar } = user;
 
-    const handleClickSignOut = () => {
-        dispatch(UserAction.postSignOutRequest());
-    }
+    const notifyStatus = useSelector(notifyStatusState$)
+    const allUser = useSelector(allUsersState$)
+
+    const userStatus = useMemo(() => {
+        const arr = []
+        notifyStatus.forEach(status => {
+            const member = allUser.find(user => user._id === status.user_id)
+            if (member) {
+                const { last_name, first_name, avatar } = member
+                const { _id, status: newStatus, createdAt } = status
+                const newNotify = {
+                    _id,
+                    status: newStatus,
+                    createdAt,
+                    last_name,
+                    first_name,
+                    avatar
+                }
+                arr.push(newNotify)
+            }
+        })
+        return arr
+    }, [notifyStatus, allUser])
     const menu = (
-
-        <MenuAccount>
-            <MenuAccount.Item key='1'>
-                <ProfileUser>
-                    <Avatar src={avatar || ImgUser} size={60} />
-                    <div className='info'>
-                        <div className='user-name'>{last_name} {first_name}</div>
-                        <div className='content'>Xem trang cá nhân của bạn</div>
-                    </div>
-                </ProfileUser>
-            </MenuAccount.Item>
-            <MenuAccount.Item key='2' onClick={handleClickSignOut}>
-                <ProfileItem>
-                    <LogoutOutlined />
-                    <div className='content'>Đăng xuất</div>
-                </ProfileItem>
-            </MenuAccount.Item>
-        </MenuAccount>
+        <MenuOption >
+            <MenuOptionAccount user={user} ImgUser={ImgUser} />
+        </MenuOption>
     )
 
+    const menuNotification = (
+        <MenuOption >
+            <MenuOptionNotify user={userStatus} ImgUser={ImgUser} />
+        </MenuOption>
+    )
+
+    const menuWechat = (
+        <MenuOption >
+            <MenuOptionChat />
+        </MenuOption>
+    )
     return (
         <Row
             gutter={{ lg: 4 }}
@@ -48,28 +66,40 @@ function EndNav(props) {
             <Col md={0} lg={8}>
                 <User>
                     <Avatar src={avatar || ImgUser} size={28} alt={last_name} />
-                    <div className='user-name'>{`${last_name} ${first_name}`}</div>
+                    <div className='user-name'>{`${last_name}`}</div>
                 </User>
             </Col>
             <Col>
 
                 <Tooltip title="Messenger" placement="bottom">
-                    <EndHeader><CommentOutlined /></EndHeader>
+                    <Dropdown placement="bottomCenter" getPopupContainer={(triggerNode) => triggerNode} overlay={menuWechat} trigger={['click']}>
+                        <Badge count={5} offset={[-4, 6]}>
+                            <EndHeader><WechatOutlined /></EndHeader>
+                        </Badge>
+                    </Dropdown>
                 </Tooltip>
             </Col>
             <Col>
                 <Tooltip title="Thông báo" placement="bottom">
-                    <EndHeader><BellFilled /></EndHeader>
+                    <Dropdown placement="bottomCenter" getPopupContainer={(triggerNode) => triggerNode} overlay={menuNotification} trigger={['click']}>
+                        <Badge count={notifyStatus.length} offset={[-4, 6]}>
+                            <EndHeader>
+                                <BellFilled />
+                            </EndHeader>
+                        </Badge>
+                    </Dropdown>
                 </Tooltip>
             </Col>
             <Col>
                 <Tooltip title="Tài khoản" placement="bottom">
-                    <Dropdown overlay={menu} trigger={['click']}>
-                        <EndHeader><CaretDownOutlined /></EndHeader>
+                    <Dropdown getPopupContainer={(triggerNode) => triggerNode} overlay={menu} trigger={['click']}>
+                        <EndHeader>
+                            <CaretDownOutlined />
+                        </EndHeader>
                     </Dropdown>
                 </Tooltip>
             </Col>
-        </Row>
+        </Row >
     );
 }
 

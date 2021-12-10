@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+    background-color: var(--background-color-menu);
     padding: 16px 0 0 8px;
     height: calc(100vh - var(--height-header));
     overflow: hidden;
     position: fixed;
     width: 20.833%;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
     :hover {
         overflow: auto;
         ::-webkit-scrollbar {
@@ -28,8 +30,8 @@ export const Wrapper = styled.div`
 export const Option = styled.div`
     display: flex;
     align-items: center;
-    padding: 0 6px;
-    gap: 8px;
+    padding: 4px 12px;
+    gap: 4px;
     font-size: 0.9375rem;
     font-weight: 600;
     border-radius: var(--border-radius-item);
@@ -40,7 +42,7 @@ export const Option = styled.div`
         border-radius: 50%;
     }
     div{
-        padding: 10px 0;
+        padding: 4px;
         text-transform: capitalize;
     }
     :hover {
@@ -49,9 +51,7 @@ export const Option = styled.div`
 `
 
 export const Hr = styled.hr`
-    margin: 8px 0;
-    margin-left: 12px;
-    color: #CED0D4;
+    color: var(--gray);
 `
 export const H3 = styled.h3`
     font-size: 1.0625rem;

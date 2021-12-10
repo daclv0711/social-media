@@ -3,14 +3,13 @@ import { baseUrl } from 'constants/api';
 import instance from './index';
 import { getLocalStorage } from 'utils/localStorage';
 
-const URL = `${baseUrl}/api`
 
 //auth
-export const signIn = (data) => axios.post(`${URL}/auth/signin`, data);
+export const signIn = (data) => axios.post(`${baseUrl}/auth/signin`, data);
 
-export const signUp = (data) => axios.post(`${URL}/auth/signup`, data);
+export const signUp = (data) => axios.post(`${baseUrl}/auth/signup`, data);
 
-export const signOut = () => axios.post(`${URL}/auth/signout`, {
+export const signOut = () => axios.post(`${baseUrl}/auth/signout`, {
     refreshToken: getLocalStorage('refreshToken')
 });
 
@@ -21,7 +20,7 @@ export const getUser = () => instance.get('/user', {
     }
 });
 
-export const getAllUsers = () => instance.get('/user/all', {
+export const getAllUsers = () => instance.get('/user/allUser', {
     headers: {
         'Authorization': `Bearer ${getLocalStorage('accessToken')}`
     }
@@ -50,6 +49,28 @@ export const updateStatus = (id, data) => instance.put(`/status/${id}`, data, {
 })
 
 export const deleteStatus = (id) => instance.delete(`/status/${id}`, {
+    headers: {
+        'Authorization': `Bearer ${getLocalStorage('accessToken')}`
+    }
+})
+
+//comment
+
+export const getComment = () => instance.get(`/status/comment`)
+
+export const createComment = (idStatus, data) => instance.post(`/status/${idStatus}/comment`, data, {
+    headers: {
+        'Authorization': `Bearer ${getLocalStorage('accessToken')}`
+    }
+})
+
+export const updateComment = (idStatus, id, data) => instance.put(`/status/${idStatus}/comment/${id}`, data, {
+    headers: {
+        'Authorization': `Bearer ${getLocalStorage('accessToken')}`
+    }
+})
+
+export const deleteComment = (idStatus, id) => instance.delete(`/status/${idStatus}/comment/${id}`, {
     headers: {
         'Authorization': `Bearer ${getLocalStorage('accessToken')}`
     }

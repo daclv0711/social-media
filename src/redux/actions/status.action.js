@@ -1,28 +1,43 @@
 import { createActions } from "redux-actions";
-import { SHOW_STATUS_MODAL, HIDE_STATUS_MODAL, STATUS_MODAL_CONTENT, STATUS_MODAL_TITLE } from "constants/status";
+import * as status from "constants/status";
+
 export const showStatusModal = () => {
     return {
-        type: SHOW_STATUS_MODAL,
+        type: status.SHOW_STATUS_MODAL,
     };
 }
 
 export const statusModalContent = (payload) => {
     return {
-        type: STATUS_MODAL_CONTENT,
+        type: status.STATUS_MODAL_CONTENT,
         payload,
     };
 }
 
 export const statusModalTitle = (payload) => {
     return {
-        type: STATUS_MODAL_TITLE,
+        type: status.STATUS_MODAL_TITLE,
         payload,
     };
 }
 
 export const hideStatusModal = () => {
     return {
-        type: HIDE_STATUS_MODAL,
+        type: status.HIDE_STATUS_MODAL,
+    }
+}
+
+export const showStatusLoadingInput = (payload) => {
+    return {
+        type: status.LOADING_INPUT_START,
+        payload,
+    }
+}
+
+export const hideStatusLoadingInput = (payload) => {
+    return {
+        type: status.LOADING_INPUT_END,
+        payload,
     }
 }
 

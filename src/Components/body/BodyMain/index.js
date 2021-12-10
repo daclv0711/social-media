@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { Wrapper } from './index.styles';
-import Stories from './Stories';
+// import Stories from './Stories';
 import AddStatus from './AddStatus';
 import Post from './Post';
 import GroupMeet from './GroupMeet';
@@ -9,13 +9,17 @@ import { allUsersState$, statusState$ } from 'redux/selectors/status';
 import { useDispatch, useSelector } from 'react-redux';
 import { StatusAction } from 'redux/actions/status.action';
 import ModalStatus from './ModalStatus';
+import { CommentActions } from 'redux/actions/comment.action';
 
 function BodyMain(props) {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(StatusAction.getStatusRequest())
+        dispatch(CommentActions.getCommentRequest())
     }, [dispatch])
+
     const statusAll = useSelector(statusState$);
+
     const allUser = useSelector(allUsersState$);
 
     const post = useMemo(() => {
@@ -25,7 +29,7 @@ function BodyMain(props) {
             if (user) {
                 const { avatar, last_name, first_name } = user;
                 const { status, createdAt, _id, updatedAt, old_status, likes, user_id } = sta;
-                arr.push({
+                const newStatus = {
                     avatar,
                     lastName: last_name,
                     firstName: first_name,
@@ -36,17 +40,16 @@ function BodyMain(props) {
                     old_status,
                     likes,
                     user_id
-                })
+                }
+                arr.push(newStatus)
             }
-
         })
         return arr;
     }, [statusAll, allUser])
-    console.log(post);
     return (
         <Wrapper>
             <ModalStatus />
-            <Stories />
+            {/* <Stories /> */}
             <AddStatus />
             <GroupMeet />
             {
@@ -58,4 +61,4 @@ function BodyMain(props) {
     );
 }
 
-export default BodyMain;
+export default React.memo(BodyMain);

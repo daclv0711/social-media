@@ -4,5 +4,9 @@ export const setLocalStorage = (key, value) => {
 }
 
 export const getLocalStorage = (key) => {
-    return JSON.parse(localStorage.getItem(key)) || '';
+    const value = JSON.parse(localStorage.getItem(key)) ?? '';
+    if (value === undefined || value === null) {
+        setLocalStorage(key, "");
+    }
+    return value;
 }

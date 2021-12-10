@@ -1,4 +1,4 @@
-import { HIDE_STATUS_MODAL, SHOW_STATUS_MODAL, STATUS_MODAL_CONTENT, STATUS_MODAL_TITLE } from 'constants/status';
+import * as status from 'constants/status';
 import { getType } from 'redux/actions';
 import { StatusAction } from 'redux/actions/status.action';
 
@@ -7,28 +7,41 @@ const initialState = {
     allUsers: [],
     showModal: false,
     modalContent: null,
-    title: ''
+    title: '',
+    loadingInput: "",
 }
 
 const statusReducer = (state = initialState, action) => {
     switch (action.type) {
 
-        case SHOW_STATUS_MODAL:
+        case status.LOADING_INPUT_START:
+            return {
+                ...state,
+                loadingInput: action.payload
+            }
+
+        case status.LOADING_INPUT_END:
+            return {
+                ...state,
+                loadingInput: action.payload
+            }
+
+        case status.SHOW_STATUS_MODAL:
             return {
                 ...state,
                 showModal: true,
             }
-        case HIDE_STATUS_MODAL:
+        case status.HIDE_STATUS_MODAL:
             return {
                 ...state,
                 showModal: false,
             }
-        case STATUS_MODAL_CONTENT:
+        case status.STATUS_MODAL_CONTENT:
             return {
                 ...state,
                 modalContent: action.payload,
             }
-        case STATUS_MODAL_TITLE:
+        case status.STATUS_MODAL_TITLE:
             return {
                 ...state,
                 title: action.payload,

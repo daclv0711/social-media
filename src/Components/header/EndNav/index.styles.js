@@ -1,4 +1,4 @@
-import { Menu } from 'antd';
+import { Input, Menu } from 'antd';
 import styled from 'styled-components'
 import { Flex } from 'utils/FlexStyles';
 
@@ -41,21 +41,31 @@ export const User = styled.div`
     }
 `
 
-export const MenuAccount = styled(Menu)`
+export const MenuOption = styled(Menu)`
     border-radius: 10px;
-    padding: 10px;
+    padding: 12px;
+    width: 350px;
    .ant-dropdown-menu-item {
-       border-radius: 10px;
+        border-radius: 10px;
    }
    .ant-dropdown-menu-item:first-child {
-       margin-bottom: 10px;
+        margin-bottom: 10px;
+   }
+   .content-chat {
+        border-top: 1px solid var(--gray-80);
+        font-weight: 600;
+        font-size: var(--font-small);
+        color: var(--blue);
    }
 `;
 
 export const ProfileUser = styled(Flex)`
-    align-items: center;
+    align-items: ;
     gap: 0.6rem;
     .info {
+        white-space: pre-wrap;
+        width: 75%;
+        word-break: break-word;
         .user-name {
             font-weight: 600;
             font-size: var(--font-small);
@@ -65,7 +75,17 @@ export const ProfileUser = styled(Flex)`
             font-size: 16px;
             color: var(--secondary-text);
         }
-        
+        .notify {
+            color: ${props => props.notify ? '#000' : 'var(--secondary-text)'};
+            b {
+                text-transform: capitalize;
+            }
+            font-size: var(--font-small);
+        }
+        .time {
+            font-size: 12px;
+            color: ${props => props.notify ? 'var(--blue)' : 'var(--secondary-text)'};
+        }
     }
 `;
 
@@ -76,4 +96,14 @@ export const ProfileItem = styled(Flex)`
         font-weight: 600;
         font-size: var(--font-small);
     }
+`;
+
+export const Title = styled.div`
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #000;
+`
+
+export const InputChat = styled(Input)`
+
 `;
