@@ -65,6 +65,14 @@ export const BlockImgUser = styled(Flex)`
     display: flex;
     align-items: center;
     position: relative;
+    .ant-image {
+        width: 40px;
+        height: 40px;
+        .ant-image-img {
+            height: 100%;
+            border-radius: 50%;
+        }
+    }
 `;
 
 export const BorderImg = styled(Blur)`

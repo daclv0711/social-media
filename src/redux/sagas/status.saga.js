@@ -43,7 +43,7 @@ export const postStatusSaga = function* ({ payload }) {
 export const updateStatusSaga = function* ({ payload }) {
     try {
         yield put(showLoading())
-        yield call(updateStatus, payload._id, payload);
+        yield call(updateStatus, payload.idStatus, payload.payload);
         // yield put(StatusAction.updateStatusSuccess(status.data));
 
     } catch (error) {

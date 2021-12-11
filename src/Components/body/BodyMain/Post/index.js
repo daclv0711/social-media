@@ -1,5 +1,5 @@
 import { EnvironmentOutlined, LikeFilled, LikeOutlined, MessageOutlined } from '@ant-design/icons';
-import { Tooltip } from 'antd';
+import { Image, Tooltip } from 'antd';
 import ImgUser from 'assets/images/no-img.png';
 import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,10 +8,10 @@ import { listCommentsState$ } from 'redux/selectors/comment';
 import { loadingState$ } from 'redux/selectors/loading';
 import { infoUserState$ } from 'redux/selectors/user';
 import { FormatDate, FormatFullDate } from 'utils/FormatDate';
-import { Block, BlockImgUser, BorderImg, UserImg } from '../index.styles';
+import { Block, BlockImgUser } from '../index.styles';
 import AddComment from './AddComment';
 import Comments from './Comments';
-import { Action, NameUser, PostAddComment, PostContent, PostHashtag, PostLodingInput, PostReaction, PostStatus, PostTime, PostUserInfo } from './index.styles';
+import { Action, NameUser, PostAddComment, PostContent, PostHashtag, PostImage, PostLodingInput, PostReaction, PostStatus, PostTime, PostUserInfo } from './index.styles';
 import PostOptionStatus from './PostOptionStatus';
 import { allUsersState$, loadingInputState$ } from 'redux/selectors/status';
 import Loading from 'assets/images/loading.gif';
@@ -19,7 +19,6 @@ import Loading from 'assets/images/loading.gif';
 function Post({ status }) {
     const [showComment, setShowComment] = React.useState(false);
     const dispatch = useDispatch();
-
     const user = useSelector(infoUserState$)
 
     const loading = useSelector(loadingState$)
@@ -53,13 +52,11 @@ function Post({ status }) {
     const handleClickComment = () => {
         setShowComment(true)
     }
-
     return (
         <Block>
             <PostUserInfo>
                 <BlockImgUser>
-                    <UserImg src={status.avatar || ImgUser} alt='user' />
-                    <BorderImg />
+                    <Image src={status.avatar || ImgUser} alt='user' />
                 </BlockImgUser>
                 <NameUser>
                     <div className='user-name'>{`${status.lastName} ${status.firstName}`}</div>
@@ -81,6 +78,11 @@ function Post({ status }) {
             <PostHashtag to='/'>
                 #abc
             </PostHashtag>
+            {status.image &&
+                <PostImage >
+                    <Image src={status.image} alt={status.status} />
+                </PostImage>
+            }
             <PostStatus>
                 {
                     status.likes.length > 0 ?

@@ -59,7 +59,7 @@ export const StatusAction = createActions({
     postStatusFailure: (err) => err,
 
     //put status
-    updateStatusRequest: (payload) => payload,
+    updateStatusRequest: (idStatus, payload) => { return { idStatus, payload } },
     updateStatusSuccess: (payload) => payload,
     updateStatusFailure: (err) => err,
 

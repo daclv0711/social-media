@@ -25,6 +25,9 @@ export const NameUser = styled(FlexDir)`
     }
 `;
 
+export const PostImage = styled.div`
+
+`;
 export const PostTime = styled(Flex)`
     align-items: center;
     gap: 0.3rem;

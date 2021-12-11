@@ -35,7 +35,6 @@ function ChangeInfoUser({ user }) {
     };
 
     const dummyRequest = ({ file, onSuccess }) => {
-        console.log(file)
         setTimeout(() => {
             onSuccess('ok');
         }, 0);
@@ -98,7 +97,7 @@ function ChangeInfoUser({ user }) {
                         maxCount={1}
                         customRequest={dummyRequest}
                     >
-                        <Button icon={<UploadOutlined />}>Change avatar</Button>
+                        <Button icon={<UploadOutlined />}>Thay avatar</Button>
                     </Upload>
                 </Form.Item>
                 <Form.Item>

@@ -25,11 +25,11 @@ function BodyMain(props) {
 
     const post = useMemo(() => {
         const arr = [];
-        statusAll.forEach(sta => {
-            const user = allUser.find(user => user._id === sta.user_id);
+        statusAll.forEach(stt => {
+            const user = allUser.find(user => user._id === stt.user_id);
             if (user) {
                 const { avatar, last_name, first_name } = user;
-                const { status, createdAt, _id, updatedAt, old_status, likes, user_id } = sta;
+                const { status, createdAt, _id, updatedAt, old_status, likes, user_id, image } = stt;
                 const newStatus = {
                     avatar,
                     lastName: last_name,
@@ -40,7 +40,8 @@ function BodyMain(props) {
                     updatedAt,
                     old_status,
                     likes,
-                    user_id
+                    user_id,
+                    image
                 }
                 arr.push(newStatus)
             }

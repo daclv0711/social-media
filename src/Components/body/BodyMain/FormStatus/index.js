@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { OptionItem, SelectObject, StatusForm, StatusUser } from './index.styles';
 import ImgUser from 'assets/images/no-img.png'
-import { GlobalOutlined, LockFilled, TeamOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Button, Input } from 'antd';
+import { GlobalOutlined, LockFilled, TeamOutlined, UploadOutlined, UserOutlined } from '@ant-design/icons';
+import { Avatar, Button, Input, Upload } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { infoUserState$ } from 'redux/selectors/user';
 import { StatusAction } from 'redux/actions/status.action';
@@ -21,23 +21,37 @@ function FormStatus(props) {
             status: data?.status
         });
     }, [data?.status, form]);
+
     const { last_name, first_name, avatar } = user;
     const handleSubmitStatus = dataForm => {
-        if (dataForm.status.trim() !== '') {
-            if (data && data._id) {
-                if (dataForm.status !== data.status) {
-                    dispatch(StatusAction.updateStatusRequest({
-                        ...data,
-                        status: dataForm.status
-                    }))
-                }
-            } else {
-                dispatch(StatusAction.postStatusRequest(dataForm));
-
-            }
-            form.resetFields();
+        const newPost = new FormData();
+        newPost.append('status', dataForm.status);
+        newPost.append('public', dataForm.public);
+        dataForm.image && newPost.append('image', '' || dataForm?.image[0]?.originFileObj);
+        data.client_id && newPost.append('client_id', data.client_id);
+        if (data && data._id) {
+            newPost.append('old_status', JSON.stringify(data.old_status));
+            dispatch(StatusAction.updateStatusRequest(data._id, newPost))
+        } else {
+            dispatch(StatusAction.postStatusRequest(newPost));
         }
+        form.resetFields();
     }
+
+    const normFile = (e) => {
+        // console.log('Upload event:', e);
+        if (Array.isArray(e)) {
+            return e;
+        }
+        return e && e.fileList;
+    };
+
+    const dummyRequest = ({ file, onSuccess }) => {
+        setTimeout(() => {
+            onSuccess('ok');
+        }, 0);
+    }
+
     return (
         <StatusForm
             form={form}
@@ -50,7 +64,7 @@ function FormStatus(props) {
                 <div className='user-info' >
                     <div className='user-name'>{`${last_name} ${first_name}`}</div>
                     <StatusForm.Item
-                        name='global'
+                        name='public'
                         initialValue={'global'}
                     >
                         <SelectObject
@@ -94,6 +108,20 @@ function FormStatus(props) {
                     allowClear={true}
                     bordered={false}
                 />
+            </StatusForm.Item>
+            <StatusForm.Item
+                name="image"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+            >
+                <Upload
+                    name="avatar"
+                    listType="picture"
+                    maxCount={1}
+                    customRequest={dummyRequest}
+                >
+                    <Button icon={<UploadOutlined />}>Thêm ảnh</Button>
+                </Upload>
             </StatusForm.Item>
             <Button
                 type='primary'
