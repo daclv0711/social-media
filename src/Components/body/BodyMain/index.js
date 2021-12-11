@@ -29,7 +29,7 @@ function BodyMain(props) {
             const user = allUser.find(user => user._id === stt.user_id);
             if (user) {
                 const { avatar, last_name, first_name } = user;
-                const { status, createdAt, _id, updatedAt, old_status, likes, user_id, image } = stt;
+                const { status, createdAt, _id, updatedAt, old_status, likes, user_id, image, cloudinary_id } = stt;
                 const newStatus = {
                     avatar,
                     lastName: last_name,
@@ -41,7 +41,8 @@ function BodyMain(props) {
                     old_status,
                     likes,
                     user_id,
-                    image
+                    image,
+                    cloudinary_id
                 }
                 arr.push(newStatus)
             }

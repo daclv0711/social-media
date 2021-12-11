@@ -109,7 +109,7 @@ function Post({ status }) {
             {
                 showComment &&
                 <>
-                    <AddComment statusId={status._id} />
+                    <AddComment statusId={status._id} userImg={user.avatar} />
                     {
                         dataComment.map(comment => <Comments key={comment._id} comment={comment} />)
                     }

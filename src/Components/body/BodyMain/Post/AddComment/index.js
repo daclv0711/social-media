@@ -7,7 +7,7 @@ import { CommentActions } from 'redux/actions/comment.action';
 import { useDispatch } from 'react-redux';
 import { socket } from 'constants/socket.io';
 
-function AddComment({ statusId }) {
+function AddComment({ statusId, userImg }) {
     const [form] = FormAddComment.useForm();
     const dispatch = useDispatch();
 
@@ -49,7 +49,7 @@ function AddComment({ statusId }) {
             form={form}
         >
             <BlockImgUser>
-                <UserImg src={ImgUser} alt='user' />
+                <UserImg src={userImg || ImgUser} alt='user' />
                 <BorderImg />
             </BlockImgUser>
             <FormAddComment.Item
