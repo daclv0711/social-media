@@ -9,6 +9,8 @@ import { UserAction } from 'redux/actions/user.action';
 import { infoUserState$ } from 'redux/selectors/user';
 import { useEffect } from 'react';
 import { getLocalStorage } from 'utils/localStorage';
+import Setting from './Setting';
+import Loading from './Loading';
 function App() {
 
   const user = useSelector(infoUserState$)
@@ -23,9 +25,11 @@ function App() {
       {user && <Header />}
       <Routes>
         <Route path="/" element={user ? <Main user={user} /> : <Auth />} />
+        <Route path="/settings" element={<Setting />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <GlobalStyle />
+      <Loading />
     </>
   );
 }

@@ -47,6 +47,7 @@ export const MenuOption = styled(Menu)`
     width: 350px;
    .ant-dropdown-menu-item {
         border-radius: 10px;
+        padding: 8px 12px
    }
    .ant-dropdown-menu-item:first-child {
         margin-bottom: 10px;

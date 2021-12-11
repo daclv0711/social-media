@@ -1,7 +1,8 @@
-import { LogoutOutlined } from '@ant-design/icons'
+import { LogoutOutlined, SettingOutlined } from '@ant-design/icons'
 import { Avatar } from 'antd'
 import React from 'react'
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { UserAction } from 'redux/actions/user.action';
 import { MenuOption, ProfileItem, ProfileUser } from './index.styles'
 
@@ -24,7 +25,15 @@ export default function MenuOptionAccount({ user, ImgUser }) {
                     </div>
                 </ProfileUser>
             </MenuOption.Item>
-            <MenuOption.Item key='2' onClick={handleClickSignOut}>
+            <MenuOption.Item key='2'>
+                <Link to='/settings'>
+                    <ProfileItem>
+                        <SettingOutlined />
+                        <div className='content'>Cài đặt</div>
+                    </ProfileItem>
+                </Link>
+            </MenuOption.Item>
+            <MenuOption.Item key='3' onClick={handleClickSignOut}>
                 <ProfileItem>
                     <LogoutOutlined />
                     <div className='content'>Đăng xuất</div>

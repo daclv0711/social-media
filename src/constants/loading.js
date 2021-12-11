@@ -1,3 +1,7 @@
 export const LOADING_START = 'LOADING_START';
 
 export const LOADING_END = 'LOADING_END';
+
+export const LOADING_MAIN_START = 'LOADING_MAIN_START';
+
+export const LOADING_MAIN_END = 'LOADING_MAIN_END';

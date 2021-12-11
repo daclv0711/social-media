@@ -2,7 +2,7 @@ import { Skeleton } from 'antd';
 import React from 'react';
 import { Block } from '../index.styles';
 
-function Loading(props) {
+function LoadingPost(props) {
 
     return (
         <Block>
@@ -11,4 +11,4 @@ function Loading(props) {
     );
 }
 
-export default React.memo(Loading);
+export default React.memo(LoadingPost);

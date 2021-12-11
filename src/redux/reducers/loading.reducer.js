@@ -1,7 +1,8 @@
-import { LOADING_END, LOADING_START } from "constants/loading"
+import { LOADING_END, LOADING_MAIN_END, LOADING_MAIN_START, LOADING_START } from "constants/loading"
 
 const initialState = {
     loading: false,
+    loadingMain: false,
 }
 
 const loadingReducer = (state = initialState, action) => {
@@ -15,6 +16,16 @@ const loadingReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
+            }
+        case LOADING_MAIN_START:
+            return {
+                ...state,
+                loadingMain: true,
+            }
+        case LOADING_MAIN_END:
+            return {
+                ...state,
+                loadingMain: false,
             }
         default:
             return state

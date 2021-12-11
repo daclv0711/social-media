@@ -7,8 +7,8 @@ import { infoUserState$ } from 'redux/selectors/user';
 import { FormatDate, FormatFullDate } from 'utils/FormatDate';
 import { ListOldStatus, TitleModal } from './index.styles';
 
-function MenuOptionStatus({status}) {
-    
+function MenuOptionStatus({ status }) {
+
     const dispatch = useDispatch();
     const [visible, setVisible] = React.useState(false);
     const user = useSelector(infoUserState$)
@@ -26,7 +26,7 @@ function MenuOptionStatus({status}) {
     const handleCancel = () => {
         setVisible(false);
     }
-
+    console.log('option')
     const showModal = () => {
         setVisible(true);
     }

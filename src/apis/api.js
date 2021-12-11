@@ -26,6 +26,17 @@ export const getAllUsers = () => instance.get('/user/allUser', {
     }
 })
 
+export const updateUser = (userId, data) => instance.put(`/user/${userId}`, data, {
+    headers: {
+        'Authorization': `Bearer ${getLocalStorage('accessToken')}`
+    }
+})
+
+export const changePassword = (userId, data) => instance.put(`/user/change-password/${userId}`, data, {
+    headers: {
+        'Authorization': `Bearer ${getLocalStorage('accessToken')}`
+    }
+})
 //status
 
 export const getStatus = () => instance.get('/status')

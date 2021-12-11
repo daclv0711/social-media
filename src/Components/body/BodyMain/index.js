@@ -4,7 +4,7 @@ import { Wrapper, Block, PostSuccess } from './index.styles';
 import AddStatus from './AddStatus';
 import Post from './Post';
 import GroupMeet from './GroupMeet';
-import Loading from './Loading';
+import LoadingPost from './LoadingPost';
 import { allUsersState$, statusState$ } from 'redux/selectors/status';
 import { useDispatch, useSelector } from 'react-redux';
 import { StatusAction } from 'redux/actions/status.action';
@@ -67,8 +67,8 @@ function BodyMain(props) {
                     </Block>
                     :
                     <>
-                        <Loading />
-                        <Loading />
+                        <LoadingPost />
+                        <LoadingPost />
                     </>
             }
         </Wrapper>

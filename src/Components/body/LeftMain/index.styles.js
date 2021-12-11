@@ -1,13 +1,11 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-    background-color: var(--background-color-menu);
     padding: 16px 0 0 8px;
     height: calc(100vh - var(--height-header));
     overflow: hidden;
     position: fixed;
     width: 20.833%;
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
     :hover {
         overflow: auto;
         ::-webkit-scrollbar {

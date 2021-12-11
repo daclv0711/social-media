@@ -27,5 +27,15 @@ export const UserAction = createActions({
     getUserRequest: undefined,
     getUserSuccess: (payload) => payload,
     getUserFailure: (err) => err,
+
+    //update user
+    updateUserRequest: (payload) => payload,
+    updateUserSuccess: (payload) => payload,
+    updateUserFailure: (err) => err,
+
+    //change password
+    changePasswordRequest: (payload) => payload,
+    changePasswordSuccess: (payload) => payload,
+    changePasswordFailure: (err) => err,
 });
 

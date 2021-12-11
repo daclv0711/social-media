@@ -1,9 +1,10 @@
-import { getUser, signIn, signOut, signUp } from "apis/api";
+import { changePassword, getUser, signIn, signOut, signUp, updateUser } from "apis/api";
 import { UserAction } from "redux/actions/user.action";
-import { call, put } from "redux-saga/effects";
+import { call, put, select } from "redux-saga/effects";
 import { setLocalStorage } from "utils/localStorage";
-import { hiddenLoading, showLoading } from "redux/actions/loading";
+import { hiddenLoading, hiddenLoadingMain, loadingMain, showLoading } from "redux/actions/loading";
 import { socket } from "constants/socket.io";
+import { infoUserState$ } from "redux/selectors/user";
 
 export const signInSaga = function* ({ payload }) {
     try {
@@ -46,13 +47,40 @@ export const signOutSaga = function* () {
 
 export const getMeSaga = function* () {
     try {
+        yield put(showLoading());
         const me = yield call(getUser);
         yield put(UserAction.getUserSuccess(me.data));
         yield socket.emit("user", me.data);
+        yield put(hiddenLoading());
     } catch (error) {
         yield setLocalStorage("refreshToken", "");
         yield setLocalStorage("accessToken", "");
         yield put(UserAction.getUserSuccess(false));
         yield put(UserAction.getUserFailure(error?.response?.data?.message || "Internal server error"));
     }
+}
+
+export const updateUserSaga = function* ({ payload }) {
+    try {
+        yield put(loadingMain());
+        const user = yield select(infoUserState$)
+        const update = yield call(updateUser, user._id, payload);
+        yield put(UserAction.updateUserSuccess(update.data));
+    } catch (error) {
+        yield put(UserAction.updateUserFailure(error?.response?.data?.message || "Internal server error"));
+    }
+    yield put(hiddenLoadingMain());
+}
+
+export const changePasswordSaga = function* ({ payload }) {
+    try {
+        yield put(loadingMain());
+        const user = yield select(infoUserState$)
+        const newPassword = yield call(changePassword, user._id, payload);
+        yield put(UserAction.changePasswordSuccess(newPassword.data));
+    } catch (error) {
+        yield put(UserAction.changePasswordFailure(error?.response?.data || "Internal server error"));
+    }
+    yield put(hiddenLoadingMain());
+
 }

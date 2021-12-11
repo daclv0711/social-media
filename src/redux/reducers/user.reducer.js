@@ -8,6 +8,7 @@ const initialState = {
     createUser: false,
     infoUser: null,
     userOnline: [],
+    infoChangePassword: "",
 }
 
 const authReducer = (state = initialState, action) => {
@@ -47,6 +48,21 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 infoUser: action.payload,
+            }
+        case getType(UserAction.updateUserSuccess):
+            return {
+                ...state,
+                infoUser: action.payload,
+            }
+        case getType(UserAction.changePasswordSuccess):
+            return {
+                ...state,
+                infoChangePassword: action.payload,
+            }
+        case getType(UserAction.changePasswordFailure):
+            return {
+                ...state,
+                infoChangePassword: action.payload,
             }
         default:
             return state

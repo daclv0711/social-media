@@ -1,5 +1,5 @@
 import React from 'react';
-import { Hr, Option, Wrapper } from './index.styles';
+import { Option, Wrapper } from './index.styles';
 // import { listData } from './listContent';
 import imgUser from 'assets/images/no-img.png';
 import { useSelector } from 'react-redux';
@@ -16,7 +16,6 @@ function LeftMain(props) {
                 <img src={avatar || imgUser} alt={last_name} />
                 <div>{`${last_name} ${first_name}`}</div>
             </Option>
-            <Hr />
             {/* {
                 listData.map((item, index) => {
                     return (

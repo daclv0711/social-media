@@ -19,7 +19,7 @@ function Comments({ comment }) {
     return (
         <PostComment>
             <BlockImgUser>
-                <UserImg src={ImgUser} alt='user' />
+                <UserImg src={comment.avatar || ImgUser} alt='user' />
                 <BorderImg />
             </BlockImgUser>
             <div>
@@ -30,7 +30,7 @@ function Comments({ comment }) {
                             {comment.comment}
                             <div className='comment-like'>
                                 <LikeFilled style={{ color: 'var(--blue)', fontSize: 12 }} />
-                                <span>1</span>
+                                <span>{comment.likes.length}</span>
                             </div>
                         </div>
                     </div>

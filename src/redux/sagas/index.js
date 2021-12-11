@@ -4,17 +4,18 @@ import { StatusAction } from "redux/actions/status.action";
 import { UserAction } from "redux/actions/user.action";
 import { socketSaga } from "./socket.io";
 import * as status from "./status.saga";
-import { getMeSaga, signInSaga, signOutSaga, signUpSaga } from "./user.saga";
+import * as user from "./user.saga";
 import * as comment from "./comment.saga";
 
 function* mySaga() {
 
     //user
-    yield takeLatest(UserAction.postSignInRequest, signInSaga);
-    yield takeLatest(UserAction.postSignUpRequest, signUpSaga);
-    yield takeLatest(UserAction.postSignOutRequest, signOutSaga);
-    yield takeLatest(UserAction.getUserRequest, getMeSaga);
-
+    yield takeLatest(UserAction.postSignInRequest, user.signInSaga);
+    yield takeLatest(UserAction.postSignUpRequest, user.signUpSaga);
+    yield takeLatest(UserAction.postSignOutRequest, user.signOutSaga);
+    yield takeLatest(UserAction.getUserRequest, user.getMeSaga);
+    yield takeLatest(UserAction.updateUserRequest, user.updateUserSaga);
+    yield takeLatest(UserAction.changePasswordRequest, user.changePasswordSaga);
     //status
     yield takeLatest(StatusAction.getStatusRequest, status.getStatusSaga);
     yield takeLatest(StatusAction.postStatusRequest, status.postStatusSaga);
