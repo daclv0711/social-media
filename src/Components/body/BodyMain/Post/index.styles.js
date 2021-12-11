@@ -26,7 +26,12 @@ export const NameUser = styled(FlexDir)`
 `;
 
 export const PostImage = styled.div`
-
+    position: relative;
+    width: var(--width-block-main);
+    left: -1rem;
+    .ant-image {
+        width: 100%;
+    }
 `;
 export const PostTime = styled(Flex)`
     align-items: center;
