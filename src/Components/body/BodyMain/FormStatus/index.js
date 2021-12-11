@@ -28,7 +28,7 @@ function FormStatus(props) {
         newPost.append('status', dataForm.status);
         newPost.append('public', dataForm.public);
         dataForm.image && newPost.append('image', '' || dataForm?.image[0]?.originFileObj);
-        data.client_id && newPost.append('client_id', data.client_id);
+        data.cloudinary_id && newPost.append('cloudinary_id', data.cloudinary_id);
         if (data && data._id) {
             newPost.append('old_status', JSON.stringify(data.old_status));
             dispatch(StatusAction.updateStatusRequest(data._id, newPost))
