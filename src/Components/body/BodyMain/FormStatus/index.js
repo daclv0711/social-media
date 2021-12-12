@@ -27,7 +27,6 @@ function FormStatus(props) {
         const newPost = new FormData();
         newPost.append('status', dataForm.status);
         newPost.append('public', dataForm.public);
-        console.log(data);
         dataForm.image && newPost.append('image', '' || dataForm?.image[0]?.originFileObj);
         if (data && data._id) {
             data.cloudinary_id && newPost.append('cloudinary_id', data.cloudinary_id);

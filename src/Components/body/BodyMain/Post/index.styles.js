@@ -27,10 +27,13 @@ export const NameUser = styled(FlexDir)`
 
 export const PostImage = styled.div`
     position: relative;
-    width: var(--width-block-main);
+    width: var(--width-block-image);
     left: -1rem;
     .ant-image {
         width: 100%;
+        .ant-image-img {
+            // max-height: 550px;
+        }
     }
 `;
 export const PostTime = styled(Flex)`
@@ -54,12 +57,14 @@ export const PostTime = styled(Flex)`
 
 export const PostContent = styled.div`
     margin-bottom: 0.8rem;
+    overflow-wrap: break-word;
+    // word-break: break-all;
 `;
 
 export const PostHashtag = styled(Link)`
     color: var(--blue);
     cursor: pointer;
-    display: block;
+    display: inline-block;
     margin-bottom: 0.8rem;
     :hover {
         text-decoration: underline;

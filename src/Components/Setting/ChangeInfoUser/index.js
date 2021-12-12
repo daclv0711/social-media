@@ -16,7 +16,7 @@ function ChangeInfoUser({ user }) {
 
     const handleSubmit = (dataUser) => {
         let data = new FormData()
-        data.append('avatar', dataUser.avatar[0].originFileObj)
+        dataUser.avatar && data.append('avatar', dataUser.avatar[0].originFileObj)
         data.append('first_name', dataUser.firstName)
         data.append('last_name', dataUser.lastName)
         data.append('email', dataUser.email)
@@ -87,7 +87,6 @@ function ChangeInfoUser({ user }) {
                     label="Avatar"
                     {...formItemLayout}
                     name="avatar"
-                    rules={[{ required: true, message: 'Avatar không được để trống' }]}
                     valuePropName="fileList"
                     getValueFromEvent={normFile}
                 >

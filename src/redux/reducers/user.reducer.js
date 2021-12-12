@@ -1,4 +1,4 @@
-import { USER_ONLINE } from "constants/user"
+import { USER_ONLINE, LOG_IN, LOG_OUT } from "constants/user"
 import { getType } from "redux/actions"
 import { UserAction } from "redux/actions/user.action"
 
@@ -9,6 +9,7 @@ const initialState = {
     infoUser: null,
     userOnline: [],
     infoChangePassword: "",
+    isLogin: false,
 }
 
 const authReducer = (state = initialState, action) => {
@@ -17,6 +18,16 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userOnline: action.payload.filter(user => user._id !== state.infoUser?._id),
+            }
+        case LOG_IN:
+            return {
+                ...state,
+                isLogin: true,
+            }
+        case LOG_OUT:
+            return {
+                ...state,
+                isLogin: false,
             }
         case getType(UserAction.postSignInSuccess):
             return {

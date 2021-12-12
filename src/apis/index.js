@@ -14,6 +14,7 @@ instance.interceptors.response.use((response) => {
     return response;
 }, error => {
     if (error.response.status === 401) {
+        axios.interceptors.response.eject(instance.interceptors);
         return instance.post('/auth/refresh', {
             refreshToken: getLocalStorage('refreshToken')
         }).then(res => {
@@ -23,12 +24,9 @@ instance.interceptors.response.use((response) => {
             config.headers['Authorization'] = `Bearer ${token}`;
             return instance(config);
         }).catch(err => {
-            console.log(err.response);
-            if (err.response.data.message === 'Invalid token' && err.response.data.code === 400) {
-                setLocalStorage('refreshToken', '');
-                setLocalStorage('accessToken', '');
-                window.location.href = '/';
-            }
+            localStorage.removeItem('refreshToken');
+            localStorage.removeItem('accessToken');
+            return Promise.reject(err);
         })
 
     }

@@ -11,3 +11,5 @@ export const userOnlineState$ = state => state.user.userOnline;
 
 export const infoChangePasswordState$ = state => state.user.infoChangePassword;
 
+export const isLoginState$ = state => state.user.isLogin;
+

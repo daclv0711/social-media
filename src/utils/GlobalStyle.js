@@ -4,6 +4,7 @@ export const GlobalStyle = createGlobalStyle`
 :root {
   --width-body-main: 590px; 
   --width-block-main: 500px; 
+  --width-block-image: 500px;
   --white: #fff;
   --black: #000;
   --grey-body: #F0F2F5;
@@ -54,6 +55,7 @@ export const GlobalStyle = createGlobalStyle`
         --header-main: 1.6rem;
         --width-body-main: 500px;
         --width-block-main: 400px;
+        --width-block-image: 400px;
         --header-main: 1.6rem;
     }
     @media screen and (max-width: 768px) {
@@ -61,6 +63,7 @@ export const GlobalStyle = createGlobalStyle`
       --bottom-icons: -12px;
       --width-body-main: 400px;
       --width-block-main: 350px;
+      --width-block-image: 350px;
       --header-main: 1.2rem;
   }
     @media screen and (max-width: 576px) {
@@ -68,6 +71,7 @@ export const GlobalStyle = createGlobalStyle`
         --bottom-icons: -12px;
         --width-body-main: 100%;
         --width-block-main: 100%;
+        --width-block-image: calc( 100% + 2rem );
         --header-main: 1.2rem;
         --border-radius-main: 0;
     }

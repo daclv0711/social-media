@@ -10,7 +10,7 @@ const commentReducer = (state = initialState, action) => {
         case getType(CommentActions.getCommentSuccess):
             return {
                 ...state,
-                comments: [...action.payload, ...state.comments]
+                comments: action.payload,
             }
         case getType(CommentActions.createCommentSuccess):
             return {

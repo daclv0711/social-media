@@ -73,7 +73,7 @@ function EndNav(props) {
 
                 <Tooltip title="Messenger" placement="bottom">
                     <Dropdown placement="bottomCenter" getPopupContainer={(triggerNode) => triggerNode} overlay={menuWechat} trigger={['click']}>
-                        <Badge count={5} offset={[-4, 6]}>
+                        <Badge count={0} offset={[-4, 6]}>
                             <EndHeader><WechatOutlined /></EndHeader>
                         </Badge>
                     </Dropdown>

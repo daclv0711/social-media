@@ -26,7 +26,6 @@ function MenuOptionStatus({ status }) {
     const handleCancel = () => {
         setVisible(false);
     }
-    console.log('option')
     const showModal = () => {
         setVisible(true);
     }
@@ -76,4 +75,4 @@ function MenuOptionStatus({ status }) {
     )
 }
 
-export default React.memo(MenuOptionStatus);
+export default MenuOptionStatus;

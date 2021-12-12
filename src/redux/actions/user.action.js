@@ -1,10 +1,22 @@
-import { USER_ONLINE } from "constants/user"
+import { USER_ONLINE, LOG_IN, LOG_OUT } from "constants/user"
 import { createActions } from "redux-actions"
 
 export const getUserOnline = (payload) => {
     return {
         type: USER_ONLINE,
         payload,
+    }
+}
+
+export const isLoginTrue = () => {
+    return {
+        type: LOG_IN,
+    }
+}
+
+export const isLoginFalse = () => {
+    return {
+        type: LOG_OUT,
     }
 }
 

@@ -3,9 +3,7 @@ import ChangeInfoUser from 'Components/Setting/ChangeInfoUser'
 import ChangePassword from 'Components/Setting/ChangePassword'
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
-import { infoUserState$ } from 'redux/selectors/user'
-import { getLocalStorage } from 'utils/localStorage'
+import { infoUserState$, isLoginState$ } from 'redux/selectors/user'
 import { WrapperSetting } from './index.styles'
 
 const { TabPane } = Tabs
@@ -13,15 +11,16 @@ const { TabPane } = Tabs
 function Setting() {
 
     const user = useSelector(infoUserState$)
+    const isLoading = useSelector(isLoginState$)
 
     useEffect(() => {
         document.title = 'Cài đặt'
     }, [])
-
-    if ((!user && !getLocalStorage('refreshToken')) || !getLocalStorage('refreshToken') || !user) return <Navigate to='/' />
+    console.log(isLoading)
+    if (!isLoading) return null
 
     return (
-        <WrapperSetting>
+        user && <WrapperSetting>
             <Tabs tabPosition='top' size='small'>
                 <TabPane tab="Thông tin tài khoản" key="1">
                     <ChangeInfoUser user={user} />

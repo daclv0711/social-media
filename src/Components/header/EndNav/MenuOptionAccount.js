@@ -9,7 +9,6 @@ import { MenuOption, ProfileItem, ProfileUser } from './index.styles'
 export default function MenuOptionAccount({ user, ImgUser }) {
 
     const dispatch = useDispatch();
-
     const handleClickSignOut = () => {
         dispatch(UserAction.postSignOutRequest());
     }

@@ -20,6 +20,7 @@ function App() {
       dispatch(UserAction.getUserRequest());
     }
   }, [dispatch, user?._id])
+
   return (
     <>
       {user && <Header />}

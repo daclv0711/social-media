@@ -9,7 +9,7 @@ function ChangePassword() {
     const [form] = Form.useForm()
 
     const formItemLayout = {
-        labelCol: { span: 4 },
+        labelCol: { span: 6 },
         wrapperCol: { span: 8 },
     };
 
@@ -40,7 +40,7 @@ function ChangePassword() {
                     form={form}
                 >
                     <Form.Item
-                        label="Mật khẩu cũ"
+                        label="Mật khẩu hiện tại"
                         {...formItemLayout}
                         name="password"
                         rules={[{ required: true, message: 'Vui lòng nhập mật khẩu.' }, {
