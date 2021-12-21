@@ -1,9 +1,9 @@
-import { FlagOutlined, GlobalOutlined, HomeOutlined, ShopOutlined, UsergroupAddOutlined } from '@ant-design/icons';
-import { Badge, Tooltip } from 'antd';
+import { FlagOutlined, HomeOutlined, UsergroupAddOutlined } from '@ant-design/icons';
+import { Tooltip } from 'antd';
 import React, { useRef } from 'react';
 import { HeaderTitle, Wrapper } from './index.styles';
 
-function MainNav(props) {
+function MainNav() {
     const mainRef = useRef(null);
     const theme = {
         target: 'var(--blue)'
@@ -19,20 +19,6 @@ function MainNav(props) {
             </Tooltip>
             <Tooltip title="Trang" placement="bottom">
                 <HeaderTitle ><FlagOutlined /></HeaderTitle>
-            </Tooltip>
-            <Tooltip title="Marketplace" placement="bottom">
-                <HeaderTitle >
-                    <Badge count={100} offset={[8, 0]} size='small' >
-                        <ShopOutlined />
-                    </Badge>
-                </HeaderTitle>
-            </Tooltip>
-            <Tooltip title="Nhóm" placement="bottom">
-                <HeaderTitle>
-                    <Badge count={100} offset={[8, 0]} size='small'>
-                        <GlobalOutlined />
-                    </Badge>
-                </HeaderTitle>
             </Tooltip>
         </Wrapper>
     );

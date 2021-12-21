@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { FlexAll } from 'utils/FlexStyles';
-
+import { Menu } from 'antd'
 export const TitleModal = styled.div`
     font-size: 1rem;
     font-weight: bold;
@@ -30,5 +30,15 @@ export const PostIconOptions = styled(FlexAll)`
     border-radius: 50%;
     :hover {
         background-color: var(--gray);
+    }
+`;
+
+export const MenuOptionStatus = styled(Menu)`
+    border-radius: 10px;
+    padding: 4px;
+    width: 150px;
+    .ant-dropdown-menu-item {
+        border-radius: 10px;
+        padding: 8px 12px
     }
 `;

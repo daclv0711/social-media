@@ -14,7 +14,6 @@ function ChangePassword() {
     };
 
     const infoChangePassword = useSelector(infoChangePasswordState$)
-
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -48,7 +47,7 @@ function ChangePassword() {
                             message: 'Mật khẩu 8-32 ký tự, bao gồm số và chữ.'
                         }]}
                     >
-                        <Input.Password placeholder="Mật khẩu cũ" />
+                        <Input.Password placeholder="Mật khẩu hiện tại." />
                     </Form.Item>
                     <Form.Item
                         label="Mật khẩu mới"
@@ -58,11 +57,11 @@ function ChangePassword() {
                             pattern: /^(?=.*?[a-z])(?=.*?[0-9]).{8,32}$/g,
                             message: 'Mật khẩu 8-32 ký tự, bao gồm số và chữ.'
                         }, {
-                            validator: (_, value, cb) => {
+                            validator: (_, value) => {
                                 if (value && value === form.getFieldValue('password')) {
-                                    return cb('Mật khẩu mới không được trùng với mật khẩu cũ.')
+                                    return Promise.reject('Mật khẩu mới không được trùng với mật khẩu cũ')
                                 }
-                                return cb()
+                                return Promise.resolve()
                             }
                         }]}
                     >
@@ -73,11 +72,11 @@ function ChangePassword() {
                         {...formItemLayout}
                         name="reNewPassword"
                         rules={[{ required: true, message: 'Vui lòng nhập lại mật khẩu mới.' }, {
-                            validator: (_, value, cb) => {
+                            validator: (_, value) => {
                                 if (value && value !== form.getFieldValue('newPassword')) {
-                                    return cb('Mật khẩu không khớp')
+                                    return Promise.reject('Mật khẩu không khớp.')
                                 }
-                                return cb()
+                                return Promise.resolve()
                             },
                         }]}
                     >

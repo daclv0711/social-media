@@ -1,26 +1,34 @@
 import { EllipsisOutlined, LikeFilled } from '@ant-design/icons';
 import React from 'react';
-import { BlockImgUser, BorderImg, UserImg } from '../../index.styles';
-import { Comment, CommentAction, PostComment } from './index.styles';
+import { BlockImgUser } from '../../index.styles';
+import { Comment, CommentAction, MenuOptionComment, WrapperComment } from './index.styles';
 import ImgUser from 'assets/images/no-img.png'
-import { PostIconOptions } from '../PostOptionStatus/index.styles';
+import { PostIconOptions } from '../MenuStatus/index.styles';
 import { FormatDate } from 'utils/FormatDate';
-import { Dropdown, Menu } from 'antd';
-import MenuOptionComment from './MenuOptionComment';
+import { Dropdown, Image } from 'antd';
+import { useDispatch } from 'react-redux';
+import { CommentActions } from 'redux/actions/comment.action';
+import OptionsComment from './OptionsComment';
 
-function Comments({ comment }) {
+function Comments({ comment, user }) {
 
     const menu = (
-        <Menu>
-            <MenuOptionComment comment={comment} />
-        </Menu>
+        <MenuOptionComment>
+            <OptionsComment comment={comment} userId={user?._id} />
+        </MenuOptionComment>
     )
+    const dispatch = useDispatch()
+
+    const handleClickLikeComment = (id) => {
+        dispatch(CommentActions.likeCommentRequest({
+            comment_id: id
+        }))
+    }
 
     return (
-        <PostComment>
+        <WrapperComment>
             <BlockImgUser>
-                <UserImg src={comment.avatar || ImgUser} alt='user' />
-                <BorderImg />
+                <Image src={comment.avatar || ImgUser} alt={comment.userName} />
             </BlockImgUser>
             <div>
                 <Comment>
@@ -28,27 +36,30 @@ function Comments({ comment }) {
                         <div className='user-name'>{comment.userName}</div>
                         <div className='comment-content'>
                             {comment.comment}
-                            <div className='comment-like'>
-                                <LikeFilled style={{ color: 'var(--blue)', fontSize: 12 }} />
-                                <span>{comment.likes.length}</span>
-                            </div>
+                            {
+                                comment.likes.length > 0 &&
+                                <div className='comment-like'>
+                                    <LikeFilled style={{ color: 'var(--blue)', fontSize: 12 }} />
+                                    <span>{comment.likes.length}</span>
+                                </div>
+                            }
                         </div>
                     </div>
-                    <Dropdown overlay={menu} trigger={['click']} placement="bottomRight">
+                    {user && <Dropdown overlay={menu} trigger={['click']} placement="bottomLeft">
                         <PostIconOptions>
                             <EllipsisOutlined />
                         </PostIconOptions>
-                    </Dropdown>
+                    </Dropdown>}
                 </Comment>
-                <CommentAction>
-                    <div>Thích</div>
+                <CommentAction isLiked={comment.likes.includes(user?._id)}>
+                    <div className='like-comment' onClick={() => handleClickLikeComment(comment._id)}>Thích</div>
                     <div>.</div>
                     <div>Phản hồi</div>
                     <div>.</div>
-                    <div>{FormatDate(comment.updatedAt)}</div>
+                    <div>{FormatDate(comment.createdAt)}</div>
                 </CommentAction>
             </div>
-        </PostComment>
+        </WrapperComment>
     );
 }
 

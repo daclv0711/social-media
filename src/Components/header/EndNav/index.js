@@ -1,23 +1,29 @@
-import { BellFilled, CaretDownOutlined, WechatOutlined } from '@ant-design/icons';
-import React, { useMemo } from 'react';
-import { EndHeader, MenuOption, User } from './index.styles';
+import { ArrowLeftOutlined, BellFilled, CaretDownOutlined, MenuFoldOutlined, WechatOutlined } from '@ant-design/icons';
+import React, { useMemo, useState } from 'react';
+import { DrawerMenu, DrawerMenuTitle, EndHeader, MenuOption, User } from './index.styles';
 import ImgUser from 'assets/images/no-img.png';
-import { Avatar, Badge, Col, Dropdown, Row, Tooltip } from 'antd';
+import { Avatar, Badge, Button, Col, Dropdown, Row, Tooltip } from 'antd';
 import { useSelector } from 'react-redux';
-import { infoUserState$ } from 'redux/selectors/user';
 import MenuOptionChat from './MenuOptionChat';
 import MenuOptionNotify from './MenuOptionNotify';
 import MenuOptionAccount from './MenuOptionAccount';
 import { notifyStatusState$, allUsersState$ } from 'redux/selectors/status';
+import { Link } from 'react-router-dom';
+import MenuDrawerMobile from './MenuDrawerMobile';
 
-function EndNav(props) {
-
-    const user = useSelector(infoUserState$)
-    const { last_name, avatar } = user;
+function EndNav({ user }) {
 
     const notifyStatus = useSelector(notifyStatusState$)
     const allUser = useSelector(allUsersState$)
 
+    const [visible, setVisible] = useState(false);
+
+    const onClose = () => {
+        setVisible(false);
+    };
+    const showLargeDrawer = () => {
+        setVisible(true);
+    };
     const userStatus = useMemo(() => {
         const arr = []
         notifyStatus.forEach(status => {
@@ -57,49 +63,75 @@ function EndNav(props) {
     )
     return (
         <Row
-            gutter={{ lg: 4 }}
             align="middle"
-            justify="end"
+            justify="space-between"
             wrap={false}
-            style={{ columnGap: '0.6rem' }}
         >
-            <Col md={0} lg={8}>
-                <User>
-                    <Avatar src={avatar || ImgUser} size={28} alt={last_name} />
-                    <div className='user-name'>{`${last_name}`}</div>
-                </User>
-            </Col>
-            <Col>
+            {
+                user ?
+                    <>
+                        <Col md={8} xs={0}>
+                            <User>
+                                <Avatar src={user.avatar || ImgUser} size={28} alt={user.last_name} />
+                                <div className='user-name'>{`${user.last_name}`}</div>
+                            </User>
+                        </Col>
+                        <Col xs={0} md={4}>
 
-                <Tooltip title="Messenger" placement="bottom">
-                    <Dropdown placement="bottomCenter" getPopupContainer={(triggerNode) => triggerNode} overlay={menuWechat} trigger={['click']}>
-                        <Badge count={0} offset={[-4, 6]}>
-                            <EndHeader><WechatOutlined /></EndHeader>
-                        </Badge>
-                    </Dropdown>
-                </Tooltip>
+                            <Tooltip title="Messenger" placement="bottom">
+                                <Dropdown placement="bottomCenter" getPopupContainer={(triggerNode) => triggerNode} overlay={menuWechat} trigger={['click']}>
+                                    <Badge count={0} offset={[-4, 6]}>
+                                        <EndHeader><WechatOutlined /></EndHeader>
+                                    </Badge>
+                                </Dropdown>
+                            </Tooltip>
+                        </Col>
+                        <Col xs={0} md={4}>
+                            <Tooltip title="Thông báo" placement="bottom">
+                                <Dropdown placement="bottomCenter" getPopupContainer={(triggerNode) => triggerNode} overlay={menuNotification} trigger={['click']}>
+                                    <Badge count={notifyStatus.length} offset={[-4, 6]}>
+                                        <EndHeader>
+                                            <BellFilled />
+                                        </EndHeader>
+                                    </Badge>
+                                </Dropdown>
+                            </Tooltip>
+                        </Col>
+                        <Col xs={0} md={4}>
+                            <Tooltip title="Tài khoản" placement="bottom">
+                                <Dropdown placement="bottomCenter" getPopupContainer={(triggerNode) => triggerNode} overlay={menu} trigger={['click']}>
+                                    <EndHeader>
+                                        <CaretDownOutlined />
+                                    </EndHeader>
+                                </Dropdown>
+                            </Tooltip>
+                        </Col>
+                    </>
+                    :
+                    <Col md={24} xs={0}>
+                        <Link to='/account/login'>
+                            <Button type='primary'>Đăng nhập</Button>
+                        </Link>
+                    </Col>
+            }
+            <Col md={0} xs={24}>
+                <EndHeader onClick={showLargeDrawer}>
+                    <MenuFoldOutlined />
+                </EndHeader>
+                <DrawerMenu
+                    title={<DrawerMenuTitle>Social media</DrawerMenuTitle>}
+                    placement="right"
+                    width='100%'
+                    onClose={onClose}
+                    visible={visible}
+                    closeIcon={<ArrowLeftOutlined />}
+                >
+                    <MenuDrawerMobile user={user} ImgUser={ImgUser} onClose={onClose} />
+                </DrawerMenu>
             </Col>
-            <Col>
-                <Tooltip title="Thông báo" placement="bottom">
-                    <Dropdown placement="bottomCenter" getPopupContainer={(triggerNode) => triggerNode} overlay={menuNotification} trigger={['click']}>
-                        <Badge count={notifyStatus.length} offset={[-4, 6]}>
-                            <EndHeader>
-                                <BellFilled />
-                            </EndHeader>
-                        </Badge>
-                    </Dropdown>
-                </Tooltip>
-            </Col>
-            <Col>
-                <Tooltip title="Tài khoản" placement="bottom">
-                    <Dropdown getPopupContainer={(triggerNode) => triggerNode} overlay={menu} trigger={['click']}>
-                        <EndHeader>
-                            <CaretDownOutlined />
-                        </EndHeader>
-                    </Dropdown>
-                </Tooltip>
-            </Col>
+
         </Row >
+
     );
 }
 

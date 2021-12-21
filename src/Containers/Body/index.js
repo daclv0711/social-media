@@ -2,7 +2,7 @@ import { Col, Row } from 'antd';
 import BodyMain from 'Components/body/BodyMain';
 import LeftMain from 'Components/body/LeftMain';
 import RightMain from 'Components/body/RightMain';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const style = {
     position: 'relative',
@@ -10,7 +10,9 @@ const style = {
 }
 
 function Main(props) {
-
+    useEffect(() => {
+        document.title = 'Trang chủ';
+    }, [])
     return (
         <Row style={style}>
             <Col md={5} xs={0}>

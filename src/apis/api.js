@@ -13,6 +13,9 @@ export const signOut = () => axios.post(`${baseUrl}/auth/signout`, {
     refreshToken: getLocalStorage('refreshToken')
 });
 
+export const getOtp = (data) => axios.post(`${baseUrl}/auth/otp`, data);
+
+export const resetPassword = (data) => axios.post(`${baseUrl}/auth/reset-password`, data);
 //user
 export const getUser = () => instance.get('/user', {
     headers: {
@@ -76,6 +79,12 @@ export const createComment = (idStatus, data) => instance.post(`/status/${idStat
 })
 
 export const updateComment = (idStatus, id, data) => instance.put(`/status/${idStatus}/comment/${id}`, data, {
+    headers: {
+        'Authorization': `Bearer ${getLocalStorage('accessToken')}`
+    }
+})
+
+export const likeComment = (data) => instance.put(`/status/comment/likeComment`, data, {
     headers: {
         'Authorization': `Bearer ${getLocalStorage('accessToken')}`
     }

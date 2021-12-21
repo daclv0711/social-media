@@ -53,6 +53,10 @@ function createSocketChannel() {
             emit(CommentActions.updateCommentSuccess(dataUpdateComment));
         })
 
+        socket.on("like-comment", dataLikeComment => {
+            emit(CommentActions.updateCommentSuccess(dataLikeComment));
+        })
+
         socket.on("delete-comment", dataDeleteComment => {
             emit(CommentActions.deleteCommentSuccess(dataDeleteComment));
         })

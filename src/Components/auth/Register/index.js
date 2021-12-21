@@ -1,13 +1,13 @@
 import { Button, Modal, message, Input } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { UserName, ButtonRegister, FormRegister, Error } from './index.styles';
+import { UserName, ButtonRegister, FormRegister } from './index.styles';
+import { Error } from '../index.styles';
 import { UserAction } from 'redux/actions/user.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUserState$, emailExistState$ } from 'redux/selectors/user';
 
 function Register({ loading }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
-
     const emailExist = useSelector(emailExistState$);
     const createUser = useSelector(createUserState$);
     const dispatch = useDispatch();

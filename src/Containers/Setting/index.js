@@ -3,21 +3,17 @@ import ChangeInfoUser from 'Components/Setting/ChangeInfoUser'
 import ChangePassword from 'Components/Setting/ChangePassword'
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { infoUserState$, isLoginState$ } from 'redux/selectors/user'
+import { infoUserState$ } from 'redux/selectors/user'
 import { WrapperSetting } from './index.styles'
-
 const { TabPane } = Tabs
 
 function Setting() {
 
     const user = useSelector(infoUserState$)
-    const isLoading = useSelector(isLoginState$)
 
     useEffect(() => {
         document.title = 'Cài đặt'
     }, [])
-    console.log(isLoading)
-    if (!isLoading) return null
 
     return (
         user && <WrapperSetting>

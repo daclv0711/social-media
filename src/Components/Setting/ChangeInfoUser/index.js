@@ -16,11 +16,10 @@ function ChangeInfoUser({ user }) {
 
     const handleSubmit = (dataUser) => {
         let data = new FormData()
-        dataUser.avatar && data.append('avatar', dataUser.avatar[0].originFileObj)
+        dataUser.avatar?.length > 0 && data.append('avatar', dataUser.avatar[0].originFileObj)
         data.append('first_name', dataUser.firstName)
         data.append('last_name', dataUser.lastName)
         data.append('email', dataUser.email)
-        console.log("data", data)
         dispatch(UserAction.updateUserRequest(data))
         form.setFieldsValue({
             avatar: [],

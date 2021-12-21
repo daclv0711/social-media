@@ -1,4 +1,4 @@
-import { Input, Menu } from 'antd';
+import { Drawer, Input, Menu } from 'antd';
 import styled from 'styled-components'
 import { Flex } from 'utils/FlexStyles';
 
@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
 `
 
 export const EndHeader = styled.div`
+    margin: auto;
     font-size: var(--font-icons);
     width: 40px;
     height: 40px;
@@ -106,5 +107,25 @@ export const Title = styled.div`
 `
 
 export const InputChat = styled(Input)`
+`;
+
+export const DrawerMenu = styled(Drawer)`
+    .ant-drawer-header {
+        background: var(--blue);
+    }
+`;
+
+export const DrawerMenuTitle = styled.div`
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+`;
+
+export const WrapperMenuMobile = styled.div`
+    ${ProfileItem} {
+        font-size: 30px;
+        color: #000;
+        margin-bottom: 16px;
+    }
 
 `;

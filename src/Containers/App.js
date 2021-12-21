@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import { getLocalStorage } from 'utils/localStorage';
 import Setting from './Setting';
 import Loading from './Loading';
+import ProtectedRoute from './ProtectedRoute';
 function App() {
 
   const user = useSelector(infoUserState$)
@@ -23,10 +24,11 @@ function App() {
 
   return (
     <>
-      {user && <Header />}
+      <Header user={user} />
       <Routes>
-        <Route path="/" element={user ? <Main user={user} /> : <Auth />} />
-        <Route path="/settings" element={<Setting />} />
+        <Route path="/" element={<><Main user={user} /></>} />
+        <Route path="/account/*" element={<Auth />} />
+        <Route path="/setting" element={<ProtectedRoute><Setting /></ProtectedRoute>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <GlobalStyle />

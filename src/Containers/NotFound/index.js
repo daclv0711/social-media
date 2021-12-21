@@ -1,9 +1,11 @@
 import { Button, Result } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function NotFound() {
-
+    useEffect(() => {
+        document.title = 'Không tìm thấy trang';
+    }, [])
     const navigave = useNavigate();
 
     const handleClick = () => {

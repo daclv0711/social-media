@@ -22,7 +22,6 @@ function FormStatus(props) {
         });
     }, [data?.status, form]);
 
-    const { last_name, first_name, avatar } = user;
     const handleSubmitStatus = dataForm => {
         const newPost = new FormData();
         newPost.append('status', dataForm.status);
@@ -53,16 +52,16 @@ function FormStatus(props) {
     }
 
     return (
-        <StatusForm
+        user && <StatusForm
             form={form}
             onFinish={handleSubmitStatus}
             autoComplete="off"
             preserve={false}
         >
             <StatusUser>
-                <Avatar src={avatar || ImgUser} alt={last_name} size={40} />
+                <Avatar src={user.avatar || ImgUser} alt={user.last_name} size={40} />
                 <div className='user-info' >
-                    <div className='user-name'>{`${last_name} ${first_name}`}</div>
+                    <div className='user-name'>{`${user.last_name} ${user.first_name}`}</div>
                     <StatusForm.Item
                         name='public'
                         initialValue={'global'}

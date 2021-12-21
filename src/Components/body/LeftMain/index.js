@@ -8,13 +8,12 @@ import { infoUserState$ } from 'redux/selectors/user';
 function LeftMain(props) {
 
     const user = useSelector(infoUserState$)
-    const { last_name, first_name, avatar } = user;
 
     return (
-        <Wrapper>
+        user && <Wrapper>
             <Option>
-                <img src={avatar || imgUser} alt={last_name} />
-                <div>{`${last_name} ${first_name}`}</div>
+                <img src={user.avatar || imgUser} alt={user.last_name} />
+                <div>{`${user.last_name} ${user.first_name}`}</div>
             </Option>
             {/* {
                 listData.map((item, index) => {

@@ -1,4 +1,4 @@
-import { createComment, deleteComment, getComment, updateComment } from "apis/api";
+import { createComment, deleteComment, getComment, likeComment, updateComment } from "apis/api";
 import { call, put } from "redux-saga/effects";
 import { CommentActions } from "redux/actions/comment.action";
 
@@ -24,6 +24,15 @@ export function* createCommentSaga({ payload }) {
 export function* updateCommentSaga({ payload }) {
     try {
         yield call(updateComment, payload._id, payload.data);
+        // yield put(CommentActions.updateCommentSuccess(updatedComment.data.comment));
+    } catch (error) {
+        yield put(CommentActions.updateCommentFailure(error));
+    }
+}
+
+export function* likeCommentSaga({ payload }) {
+    try {
+        yield call(likeComment, payload);
         // yield put(CommentActions.updateCommentSuccess(updatedComment.data.comment));
     } catch (error) {
         yield put(CommentActions.updateCommentFailure(error));

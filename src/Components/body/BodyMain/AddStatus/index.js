@@ -1,19 +1,25 @@
 import { FileImageFilled, PlusSquareOutlined, VideoCameraFilled } from '@ant-design/icons';
 import React from 'react';
-import { Block } from '../index.styles';
-import { Media, StatusMedia, StatusInfo, CreateStatus } from './index.styles';
 import { useDispatch } from 'react-redux';
 import { showStatusModal, statusModalContent, statusModalTitle } from 'redux/actions/status.action';
 import FormStatus from '../FormStatus';
+import { Block } from '../index.styles';
+import { CreateStatus, Media, StatusInfo, StatusMedia } from './index.styles';
+import { useNavigate } from 'react-router-dom';
 
-
-function AddStatus(props) {
+function AddStatus({ user }) {
     const dispatch = useDispatch();
 
+    const navigate = useNavigate()
     const showModal = () => {
-        dispatch(showStatusModal())
-        dispatch(statusModalTitle('Tạo bài viết mới'))
-        dispatch(statusModalContent(<FormStatus />))
+        if (user) {
+            dispatch(showStatusModal())
+            dispatch(statusModalTitle('Tạo bài viết mới'))
+            dispatch(statusModalContent(<FormStatus />))
+        } else {
+            navigate('/account/login')
+        }
+
     };
 
     return (

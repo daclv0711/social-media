@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { Wrapper, Block, PostSuccess } from './index.styles';
 // import Stories from './Stories';
 import AddStatus from './AddStatus';
-import Post from './Post';
+import Status from './Post';
 import GroupMeet from './GroupMeet';
 import LoadingPost from './LoadingPost';
 import { allUsersState$, statusState$ } from 'redux/selectors/status';
@@ -11,6 +11,7 @@ import { StatusAction } from 'redux/actions/status.action';
 import ModalStatus from './ModalStatus';
 import { CommentActions } from 'redux/actions/comment.action';
 import { CheckCircleTwoTone } from '@ant-design/icons';
+import { infoUserState$ } from 'redux/selectors/user';
 
 function BodyMain(props) {
     const dispatch = useDispatch()
@@ -19,11 +20,13 @@ function BodyMain(props) {
         dispatch(CommentActions.getCommentRequest())
     }, [dispatch])
 
+    const user = useSelector(infoUserState$)
+
     const statusAll = useSelector(statusState$);
 
     const allUser = useSelector(allUsersState$);
 
-    const post = useMemo(() => {
+    const statusUser = useMemo(() => {
         const arr = [];
         statusAll.forEach(stt => {
             const user = allUser.find(user => user._id === stt.user_id);
@@ -54,13 +57,13 @@ function BodyMain(props) {
         <Wrapper>
             <ModalStatus />
             {/* <Stories /> */}
-            <AddStatus />
+            <AddStatus user={user} />
             <GroupMeet />
             {
-                post.map(status => <Post key={status._id} status={status} />)
+                statusUser.map(status => <Status key={status._id} status={status} user={user} />)
             }
             {
-                post.length > 0 ?
+                statusUser.length > 0 ?
                     <Block>
                         <PostSuccess>
                             <CheckCircleTwoTone twoToneColor="#52c41a" />

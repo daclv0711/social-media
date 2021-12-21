@@ -6,20 +6,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { StatusAction } from 'redux/actions/status.action';
 import { listCommentsState$ } from 'redux/selectors/comment';
 import { loadingState$ } from 'redux/selectors/loading';
-import { infoUserState$ } from 'redux/selectors/user';
 import { FormatDate, FormatFullDate } from 'utils/FormatDate';
 import { Block, BlockImgUser } from '../index.styles';
 import AddComment from './AddComment';
 import Comments from './Comments';
 import { Action, NameUser, PostAddComment, PostContent, PostHashtag, PostImage, PostLodingInput, PostReaction, PostStatus, PostTime, PostUserInfo } from './index.styles';
-import PostOptionStatus from './PostOptionStatus';
+import MenuStatus from './MenuStatus';
 import { allUsersState$, loadingInputState$ } from 'redux/selectors/status';
 import Loading from 'assets/images/loading.gif';
+import { useNavigate } from 'react-router-dom';
 
-function Post({ status }) {
+function Status({ status, user }) {
     const [showComment, setShowComment] = React.useState(false);
     const dispatch = useDispatch();
-    const user = useSelector(infoUserState$)
+
+    const navigate = useNavigate();
 
     const loading = useSelector(loadingState$)
 
@@ -52,6 +53,12 @@ function Post({ status }) {
     const handleClickComment = () => {
         setShowComment(true)
     }
+
+    const handleClickWriteComment = () => {
+        if (user)
+            setShowComment(true)
+        else navigate('/account/login')
+    }
     return (
         <Block>
             <PostUserInfo>
@@ -69,7 +76,7 @@ function Post({ status }) {
                     </PostTime>
                 </NameUser>
                 {/* Post edit */}
-                <PostOptionStatus status={status} />
+                {user && <MenuStatus status={status} />}
 
             </PostUserInfo>
             <PostContent>
@@ -97,7 +104,7 @@ function Post({ status }) {
                 }
             </PostStatus>
             <PostReaction>
-                <Action onClick={() => hanldeClickLike(status._id)} colors={status.likes.includes(user._id)}>
+                <Action onClick={() => hanldeClickLike(status._id)} colors={status.likes.includes(user?._id)}>
                     <LikeOutlined />
                     <div>Thích</div>
                 </Action>
@@ -109,9 +116,9 @@ function Post({ status }) {
             {
                 showComment &&
                 <>
-                    <AddComment statusId={status._id} userImg={user.avatar} />
+                    {user && <AddComment userImg={user.avatar} statusId={status._id} />}
                     {
-                        dataComment.map(comment => <Comments key={comment._id} comment={comment} />)
+                        dataComment.map(comment => <Comments key={comment._id} user={user} comment={comment} />)
                     }
 
                 </>
@@ -129,9 +136,9 @@ function Post({ status }) {
             </Sort>
             <Comments />
             <Comments /> */}
-            <PostAddComment onClick={() => setShowComment(true)}>Viết bình luận...</PostAddComment>
+            <PostAddComment onClick={handleClickWriteComment}>Viết bình luận...</PostAddComment>
         </Block>
     );
 }
 
-export default React.memo(Post);
+export default React.memo(Status);

@@ -35,11 +35,19 @@ export const UserAction = createActions({
     postSignOutRequest: undefined,
     postSignOutSuccess: (payload) => payload,
     postSignOutFailure: (err) => err,
+    //get otp
+    postOtpRequest: (payload) => payload,
+    postOtpSuccess: (payload) => payload,
+    postOtpFailure: (err) => err,
+
+    //reset password
+    postResetPasswordRequest: (payload) => payload,
+    postResetPasswordSuccess: (payload) => payload,
+    postResetPasswordFailure: (err) => err,
     //get user
     getUserRequest: undefined,
     getUserSuccess: (payload) => payload,
     getUserFailure: (err) => err,
-
     //update user
     updateUserRequest: (payload) => payload,
     updateUserSuccess: (payload) => payload,

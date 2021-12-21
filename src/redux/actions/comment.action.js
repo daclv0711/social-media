@@ -15,6 +15,11 @@ export const CommentActions = createActions({
     updateCommentSuccess: (payload) => payload,
     updateCommentFailure: (err) => err,
 
+    //like Comment
+    likeCommentRequest: (payload) => payload,
+    likeCommentSuccess: (payload) => payload,
+    likeCommentFailure: (err) => err,
+
     //delete Comment
     deleteCommentRequest: (payload) => payload,
     deleteCommentSuccess: (payload) => payload,

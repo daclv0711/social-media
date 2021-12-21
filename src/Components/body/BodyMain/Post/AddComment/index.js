@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { BlockImgUser, BorderImg, UserImg } from '../../index.styles';
+import { BlockImgUser } from '../../index.styles';
 import { FormAddComment } from './index.styles';
 import ImgUser from 'assets/images/no-img.png'
-import { Input } from 'antd';
+import { Input, Image } from 'antd';
 import { CommentActions } from 'redux/actions/comment.action';
 import { useDispatch } from 'react-redux';
 import { socket } from 'constants/socket.io';
@@ -49,8 +49,7 @@ function AddComment({ statusId, userImg }) {
             form={form}
         >
             <BlockImgUser>
-                <UserImg src={userImg || ImgUser} alt='user' />
-                <BorderImg />
+                <Image src={userImg || ImgUser} alt='user' />
             </BlockImgUser>
             <FormAddComment.Item
                 name='comment'

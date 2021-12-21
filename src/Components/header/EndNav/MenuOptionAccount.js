@@ -25,7 +25,7 @@ export default function MenuOptionAccount({ user, ImgUser }) {
                 </ProfileUser>
             </MenuOption.Item>
             <MenuOption.Item key='2'>
-                <Link to='/settings'>
+                <Link to='/setting'>
                     <ProfileItem>
                         <SettingOutlined />
                         <div className='content'>Cài đặt</div>

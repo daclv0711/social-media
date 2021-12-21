@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Input } from 'antd';
-import { Wrapper, FormLogin } from './index.styles';
-import Register from '../Register';
+import { FormLogin } from './index.styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { UserAction } from 'redux/actions/user.action';
-import { Error } from '../Register/index.styles';
-import { isLoginState$, passwordWrongState$ } from 'redux/selectors/user';
-import { loadingState$ } from 'redux/selectors/loading';
+import { Error } from '../index.styles';
+import { passwordWrongState$ } from 'redux/selectors/user';
+import { Link } from 'react-router-dom';
+import { WrapperAuth } from '../index.styles';
+import Register from '../Register';
 // import ReCAPTCHA from 'react-google-recaptcha';
 // import axios from 'axios';
 // import { baseUrl } from 'constants/api';
 
-function Login(props) {
+function Login({ loading }) {
 
     // const [keyGoogleCaptcha, setKeyGoogleCaptcha] = useState(null);
 
@@ -28,21 +29,20 @@ function Login(props) {
     //     }
     // }, []);
 
+    useEffect(() => {
+        document.title = 'Đăng nhập/Đăng ký';
+    }, []);
+
     const dispatch = useDispatch();
     const passWrong = useSelector(passwordWrongState$);
-    const loading = useSelector(loadingState$);
-    const isLogin = useSelector(isLoginState$);
+
     const handleSubmitLogin = (data) => {
         dispatch(UserAction.postSignInRequest(data));
     }
 
-    if (isLogin) {
-        return null
-    }
-
-
     return (
-        <Wrapper>
+
+        <WrapperAuth>
             <h1>Đăng Nhập</h1>
             <FormLogin onFinish={handleSubmitLogin}>
                 <FormLogin.Item
@@ -73,13 +73,15 @@ function Login(props) {
                 <Button type="primary" htmlType="submit" block size='large' loading={loading}>
                     Đăng nhập
                 </Button>
-                <p className="login-form-forgot">
-                    Quên mật khẩu?
-                </p>
+                <Link to='/account/forgot-password'>
+                    <p className="login-form-forgot">
+                        Quên mật khẩu?
+                    </p>
+                </Link>
                 <hr />
             </FormLogin>
             <Register loading={loading} />
-        </Wrapper>
+        </WrapperAuth>
     );
 }
 

@@ -15,17 +15,18 @@ const style = {
 }
 
 
-function Headers() {
+function Headers({ user }) {
     return (
-        <Row align='middle' wrap={true} justify='space-around' style={style}>
-            <Col md={6} xs={0} flex='flex'>
-                <LeftNav />
+        <Row align='middle' wrap={true} justify='space-between' style={style}>
+            <Col md={6} xs={4} flex='flex'>
+                <LeftNav user={user} />
             </Col>
-            <Col md={12} xs={24}>
+            {user && <Col md={12} xs={16}>
                 <MainNav />
             </Col>
-            <Col md={6} xs={0}>
-                <EndNav />
+            }
+            <Col md={6} xs={4} style={{ textAlign: 'end' }}>
+                <EndNav user={user} />
             </Col>
         </Row>
     );

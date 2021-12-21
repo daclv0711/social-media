@@ -10,6 +10,10 @@ const initialState = {
     userOnline: [],
     infoChangePassword: "",
     isLogin: false,
+    otp: false,
+    otpError: "",
+    resetPassword: false,
+    resetPasswordError: "",
 }
 
 const authReducer = (state = initialState, action) => {
@@ -54,6 +58,30 @@ const authReducer = (state = initialState, action) => {
         case getType(UserAction.postSignOutFailure):
             return {
                 ...state,
+            }
+        case getType(UserAction.postOtpSuccess):
+            return {
+                ...state,
+                otp: action.payload,
+                otpError: "",
+            }
+        case getType(UserAction.postOtpFailure):
+            return {
+                ...state,
+                otpError: action.payload,
+                otp: false,
+            }
+        case getType(UserAction.postResetPasswordSuccess):
+            return {
+                ...state,
+                resetPassword: action.payload,
+                resetPasswordError: "",
+            }
+        case getType(UserAction.postResetPasswordFailure):
+            return {
+                ...state,
+                resetPassword: false,
+                resetPasswordError: action.payload,
             }
         case getType(UserAction.getUserSuccess):
             return {

@@ -72,6 +72,9 @@ export const BlockImgUser = styled(Flex)`
             height: 100%;
             border-radius: 50%;
         }
+        .ant-image-mask {
+            border-radius: 50%;
+        }
     }
 `;
 

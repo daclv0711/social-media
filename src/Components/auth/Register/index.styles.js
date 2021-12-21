@@ -46,8 +46,3 @@ export const Email = styled.div`
 `;
 
 export const Password = styled(Email)``;
-
-export const Error = styled.div`
-    color: #ff4d4f;
-    align-self: start;
-`;
