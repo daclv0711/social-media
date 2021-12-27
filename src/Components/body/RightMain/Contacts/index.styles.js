@@ -18,4 +18,7 @@ export const UserName = styled.div`
     font-weight: 600;
     color: var(--secondary-text);
     text-transform: capitalize;
+    .time-online {
+        font-size: 8px;
+    }
 `

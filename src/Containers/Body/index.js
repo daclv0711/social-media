@@ -2,17 +2,15 @@ import { Col, Row } from 'antd';
 import BodyMain from 'Components/body/BodyMain';
 import LeftMain from 'Components/body/LeftMain';
 import RightMain from 'Components/body/RightMain';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const style = {
-    position: 'relative',
-    top: 'var(--height-header)'
+    marginTop: 'var(--height-header)',
+    width: '100%',
 }
 
 function Main(props) {
-    useEffect(() => {
-        document.title = 'Trang chủ';
-    }, [])
+    document.title = 'Trang chủ';
     return (
         <Row style={style}>
             <Col md={5} xs={0}>

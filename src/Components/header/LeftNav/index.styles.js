@@ -5,6 +5,7 @@ export const Wrapper = styled(Flex)`
     align-items: center;
 `
 export const Input = styled(Flex)`
+    width: fit-content;
     gap: 10px;
     align-items: center;
     margin-left: 10px;

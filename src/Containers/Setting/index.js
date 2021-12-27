@@ -1,19 +1,12 @@
 import { Tabs } from 'antd'
 import ChangeInfoUser from 'Components/Setting/ChangeInfoUser'
 import ChangePassword from 'Components/Setting/ChangePassword'
-import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import { infoUserState$ } from 'redux/selectors/user'
+import React from 'react'
 import { WrapperSetting } from './index.styles'
 const { TabPane } = Tabs
 
-function Setting() {
-
-    const user = useSelector(infoUserState$)
-
-    useEffect(() => {
-        document.title = 'Cài đặt'
-    }, [])
+function Setting({ user }) {
+    document.title = 'Cài đặt'
 
     return (
         user && <WrapperSetting>

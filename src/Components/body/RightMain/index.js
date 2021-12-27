@@ -6,7 +6,6 @@ import Contacts from './Contacts';
 import { TopContact, Wrapper, Title, SelectContact } from './index.styles';
 
 function RightMain(props) {
-
     const userChat = useSelector(userOnlineState$);
     return (
         <Wrapper>
@@ -17,10 +16,10 @@ function RightMain(props) {
                 <SelectContact><EllipsisOutlined /></SelectContact>
             </TopContact>
             {
-                userChat.map(user => <Contacts key={user._id} user={user} />)
+                userChat.map(user => <Contacts key={user._id} userOnline={user} />)
             }
         </Wrapper>
     );
 }
 
-export default RightMain;
+export default React.memo(RightMain);

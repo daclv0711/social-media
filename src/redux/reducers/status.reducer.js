@@ -9,6 +9,8 @@ const initialState = {
     modalContent: null,
     title: '',
     loadingInput: "",
+    total: null,
+    loading: false,
 }
 
 const statusReducer = (state = initialState, action) => {
@@ -46,10 +48,19 @@ const statusReducer = (state = initialState, action) => {
                 ...state,
                 title: action.payload,
             }
-        case getType(StatusAction.getStatusSuccess):
+        case getType(StatusAction.getStatusRequest):
             return {
                 ...state,
-                allStatus: action.payload,
+                loading: true,
+            }
+        case getType(StatusAction.getStatusSuccess):
+            const { data, total } = action.payload;
+
+            return {
+                ...state,
+                allStatus: [...state.allStatus, ...data],
+                total,
+                loading: false,
             }
         case getType(StatusAction.postStatusSuccess):
             return {

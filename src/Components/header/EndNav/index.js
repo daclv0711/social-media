@@ -4,14 +4,13 @@ import { DrawerMenu, DrawerMenuTitle, EndHeader, MenuOption, User } from './inde
 import ImgUser from 'assets/images/no-img.png';
 import { Avatar, Badge, Button, Col, Dropdown, Row, Tooltip } from 'antd';
 import { useSelector } from 'react-redux';
-import MenuOptionChat from './MenuOptionChat';
 import MenuOptionNotify from './MenuOptionNotify';
 import MenuOptionAccount from './MenuOptionAccount';
 import { notifyStatusState$, allUsersState$ } from 'redux/selectors/status';
 import { Link } from 'react-router-dom';
 import MenuDrawerMobile from './MenuDrawerMobile';
 
-function EndNav({ user }) {
+function EndNav({ user, isLogin }) {
 
     const notifyStatus = useSelector(notifyStatusState$)
     const allUser = useSelector(allUsersState$)
@@ -56,11 +55,12 @@ function EndNav({ user }) {
         </MenuOption>
     )
 
-    const menuWechat = (
-        <MenuOption >
-            <MenuOptionChat />
-        </MenuOption>
-    )
+    // const menuWechat = (
+    //     <MenuOption >
+    //         <MenuOptionChat />
+    //     </MenuOption>
+    // )
+
     return (
         <Row
             align="middle"
@@ -68,25 +68,29 @@ function EndNav({ user }) {
             wrap={false}
         >
             {
-                user ?
+                isLogin ?
                     <>
                         <Col md={8} xs={0}>
-                            <User>
-                                <Avatar src={user.avatar || ImgUser} size={28} alt={user.last_name} />
-                                <div className='user-name'>{`${user.last_name}`}</div>
-                            </User>
+                            {user &&
+                                <User>
+                                    <Avatar src={user.avatar || ImgUser} size={28} alt={user.last_name} />
+                                    <div className='user-name'>{`${user.last_name}`}</div>
+                                </User>
+                            }
                         </Col>
-                        <Col xs={0} md={4}>
+                        <Col xs={0} md={4} style={{ flex: '0 0 0' }}>
 
                             <Tooltip title="Messenger" placement="bottom">
-                                <Dropdown placement="bottomCenter" getPopupContainer={(triggerNode) => triggerNode} overlay={menuWechat} trigger={['click']}>
+                                {/* <Dropdown placement="bottomCenter" getPopupContainer={(triggerNode) => triggerNode} overlay={menuWechat} trigger={['click']}> */}
+                                <Link to='/chat'>
                                     <Badge count={0} offset={[-4, 6]}>
                                         <EndHeader><WechatOutlined /></EndHeader>
                                     </Badge>
-                                </Dropdown>
+                                </Link>
+                                {/* </Dropdown> */}
                             </Tooltip>
                         </Col>
-                        <Col xs={0} md={4}>
+                        <Col xs={0} md={4} style={{ flex: '0 0 0' }}>
                             <Tooltip title="Thông báo" placement="bottom">
                                 <Dropdown placement="bottomCenter" getPopupContainer={(triggerNode) => triggerNode} overlay={menuNotification} trigger={['click']}>
                                     <Badge count={notifyStatus.length} offset={[-4, 6]}>
@@ -97,7 +101,7 @@ function EndNav({ user }) {
                                 </Dropdown>
                             </Tooltip>
                         </Col>
-                        <Col xs={0} md={4}>
+                        <Col xs={0} md={4} style={{ flex: '0 0 0' }}>
                             <Tooltip title="Tài khoản" placement="bottom">
                                 <Dropdown placement="bottomCenter" getPopupContainer={(triggerNode) => triggerNode} overlay={menu} trigger={['click']}>
                                     <EndHeader>

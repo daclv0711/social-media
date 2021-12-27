@@ -23,7 +23,7 @@ export function* createCommentSaga({ payload }) {
 
 export function* updateCommentSaga({ payload }) {
     try {
-        yield call(updateComment, payload._id, payload.data);
+        yield call(updateComment, payload.statusId, payload.commentId, { comment: payload.comment });
         // yield put(CommentActions.updateCommentSuccess(updatedComment.data.comment));
     } catch (error) {
         yield put(CommentActions.updateCommentFailure(error));

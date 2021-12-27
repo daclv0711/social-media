@@ -12,11 +12,10 @@ import AddComment from './AddComment';
 import Comments from './Comments';
 import { Action, NameUser, PostAddComment, PostContent, PostHashtag, PostImage, PostLodingInput, PostReaction, PostStatus, PostTime, PostUserInfo } from './index.styles';
 import MenuStatus from './MenuStatus';
-import { allUsersState$, loadingInputState$ } from 'redux/selectors/status';
 import Loading from 'assets/images/loading.gif';
 import { useNavigate } from 'react-router-dom';
 
-function Status({ status, user }) {
+function Status({ status, user, loadingInput, allUsers }) {
     const [showComment, setShowComment] = React.useState(false);
     const dispatch = useDispatch();
 
@@ -24,11 +23,8 @@ function Status({ status, user }) {
 
     const loading = useSelector(loadingState$)
 
-    const allUser = useSelector(allUsersState$)
-
-    const loadingInput = useSelector(loadingInputState$)
     const hanldeClickLike = (id) => {
-        if (!loading) {
+        if (!loading && user) {
             dispatch(StatusAction.likeStatusRequest({ status_id: id }))
         }
     }
@@ -37,7 +33,7 @@ function Status({ status, user }) {
     const dataComment = useMemo(() => {
         const arr = [];
         comments.forEach(comment => {
-            const userComment = allUser.find(user => user._id === comment.user_id)
+            const userComment = allUsers.find(user => user._id === comment.user_id)
             if (userComment) {
                 arr.push({
                     ...comment,
@@ -48,7 +44,7 @@ function Status({ status, user }) {
 
         })
         return arr.filter(comment => comment.status_id === status._id)
-    }, [comments, status._id, allUser])
+    }, [comments, status._id, allUsers])
 
     const handleClickComment = () => {
         setShowComment(true)
@@ -58,6 +54,19 @@ function Status({ status, user }) {
         if (user)
             setShowComment(true)
         else navigate('/account/login')
+    }
+
+    const handlePublishStatus = (status) => {
+        switch (status) {
+            case 'public':
+                return 'Công khai'
+            case 'private':
+                return 'Chỉ mình tôi'
+            case 'friends':
+                return 'Bạn bè'
+            default:
+                return 'Công khai'
+        }
     }
     return (
         <Block>
@@ -72,7 +81,9 @@ function Status({ status, user }) {
                             <div>{FormatDate(status.createdAt)}</div>
                         </Tooltip>
                         <div>.</div>
-                        <EnvironmentOutlined />
+                        <Tooltip title={handlePublishStatus(status.publices)} placement="bottom">
+                            <EnvironmentOutlined />
+                        </Tooltip>
                     </PostTime>
                 </NameUser>
                 {/* Post edit */}
@@ -116,7 +127,7 @@ function Status({ status, user }) {
             {
                 showComment &&
                 <>
-                    {user && <AddComment userImg={user.avatar} statusId={status._id} />}
+                    {user && <AddComment userImg={user.avatar} statusId={status._id} comment={dataComment} />}
                     {
                         dataComment.map(comment => <Comments key={comment._id} user={user} comment={comment} />)
                     }

@@ -12,10 +12,11 @@ export const signInSaga = function* ({ payload }) {
         const signin = yield call(apiUser.signIn, payload);
         yield put(UserAction.postSignInSuccess(signin?.data));
         yield put(isLoginTrue());
+        yield socket.connect();
+        yield socket.emit("user", signin.data.user);
         yield put(UserAction.getUserSuccess(signin?.data?.user));
         yield setLocalStorage("accessToken", signin?.data?.token);
         yield setLocalStorage("refreshToken", signin.data.refreshToken);
-        yield socket.emit("user", signin.data.user);
     } catch (error) {
         yield put(isLoginFalse());
         yield put(UserAction.postSignInFailure(error?.response?.data?.message || "Internal server error"));
@@ -36,10 +37,10 @@ export const signUpSaga = function* ({ payload }) {
 
 export const signOutSaga = function* () {
     try {
+        yield localStorage.removeItem("accessToken");
         const out = yield call(apiUser.signOut);
         yield put(UserAction.postSignOutSuccess(out.data));
         yield localStorage.removeItem("refreshToken");
-        yield localStorage.removeItem("accessToken");
         yield put(isLoginFalse());
         yield put(UserAction.getUserSuccess(null));
         yield socket.disconnect();
@@ -79,7 +80,7 @@ export const getMeSaga = function* () {
         yield put(isLoginTrue())
         const me = yield call(apiUser.getUser);
         yield put(UserAction.getUserSuccess(me?.data));
-        yield socket.emit("user", me?.data);
+        yield socket.emit("user", me.data);
     } catch (error) {
         yield put(isLoginFalse());
         yield put(UserAction.getUserSuccess(null));

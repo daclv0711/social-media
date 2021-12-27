@@ -10,7 +10,6 @@ export const Wrapper = styled.div`
 `
 
 export const EndHeader = styled.div`
-    margin: auto;
     font-size: var(--font-icons);
     width: 40px;
     height: 40px;
