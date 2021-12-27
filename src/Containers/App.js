@@ -12,8 +12,10 @@ import { getLocalStorage } from 'utils/localStorage';
 import Setting from './Setting';
 import Loading from './Loading';
 import ProtectedRoute from './ProtectedRoute';
-function App() {
+import history from 'utils/history';
+import Chat from './Chat';
 
+function App() {
   const user = useSelector(infoUserState$)
   const dispatch = useDispatch();
   useEffect(() => {
@@ -25,10 +27,16 @@ function App() {
   return (
     <>
       <Header user={user} />
-      <Routes>
-        <Route path="/" element={<><Main user={user} /></>} />
+      <Routes history={history}>
+        <Route path="/" element={<>
+          <Main user={user} />
+        </>} />
         <Route path="/account/*" element={<Auth />} />
-        <Route path="/setting" element={<ProtectedRoute><Setting /></ProtectedRoute>} />
+        <Route path="/setting" element={
+          <ProtectedRoute>
+            <Setting user={user} />
+          </ProtectedRoute>} />
+        <Route path="/chat" element={<ProtectedRoute><Chat user={user} /></ProtectedRoute>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <GlobalStyle />

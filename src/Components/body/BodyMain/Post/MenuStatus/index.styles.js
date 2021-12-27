@@ -19,7 +19,8 @@ export const ListOldStatus = styled.div`
         padding: 1rem;
         border-radius: 1rem;
         background-color: var(--gray-70);
-
+        white-space: break-spaces;
+        word-break: break-word;
     }
 `;
 
@@ -36,7 +37,7 @@ export const PostIconOptions = styled(FlexAll)`
 export const MenuOptionStatus = styled(Menu)`
     border-radius: 10px;
     padding: 4px;
-    width: 150px;
+    min-width: 150px;
     .ant-dropdown-menu-item {
         border-radius: 10px;
         padding: 8px 12px

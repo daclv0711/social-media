@@ -3,6 +3,8 @@ import { Row, Col } from 'antd';
 import LeftNav from 'Components/header/LeftNav';
 import MainNav from 'Components/header/MainNav';
 import EndNav from 'Components/header/EndNav';
+import { useSelector } from 'react-redux';
+import { isLoginState$ } from 'redux/selectors/user';
 const style = {
     height: 'var(--height-header)',
     padding: '0 12px',
@@ -12,21 +14,23 @@ const style = {
     position: 'fixed',
     zIndex: '999',
     width: '100%',
+    top: 0,
 }
 
 
 function Headers({ user }) {
+    const isLogin = useSelector(isLoginState$);
     return (
         <Row align='middle' wrap={true} justify='space-between' style={style}>
-            <Col md={6} xs={4} flex='flex'>
-                <LeftNav user={user} />
+            <Col md={7} xs={4} flex='flex'>
+                <LeftNav isLogin={isLogin} />
             </Col>
-            {user && <Col md={12} xs={16}>
+            {isLogin && <Col md={10} xs={16}>
                 <MainNav />
             </Col>
             }
-            <Col md={6} xs={4} style={{ textAlign: 'end' }}>
-                <EndNav user={user} />
+            <Col md={7} xs={4} style={{ textAlign: 'end' }}>
+                <EndNav user={user} isLogin={isLogin} />
             </Col>
         </Row>
     );

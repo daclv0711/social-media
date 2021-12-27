@@ -16,6 +16,10 @@ function OptionsComment({ comment, userId }) {
         }));
     }
 
+    const handleClickGetContentComment = (e) => {
+        dispatch(CommentActions.getContentComment(e));
+    }
+
     const handleCancel = () => {
         setVisible(false);
     }
@@ -29,7 +33,7 @@ function OptionsComment({ comment, userId }) {
             {
                 userId === comment.user_id &&
                 <>
-                    <Menu.Item key="0">
+                    <Menu.Item key="0" onClick={() => handleClickGetContentComment(comment)}>
                         Sửa
                     </Menu.Item>
                     <Menu.Item key="1" onClick={() => handleClickDeletePost(comment)}>

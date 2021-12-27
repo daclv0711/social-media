@@ -18,9 +18,10 @@ function FormStatus(props) {
     const [form] = StatusForm.useForm();
     useEffect(() => {
         form.setFieldsValue({
-            status: data?.status
+            status: data?.status,
+            public: data?.publices || 'global',
         });
-    }, [data?.status, form]);
+    }, [data?.status, data?.publices, form]);
 
     const handleSubmitStatus = dataForm => {
         const newPost = new FormData();

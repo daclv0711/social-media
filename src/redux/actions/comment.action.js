@@ -1,6 +1,11 @@
 import { createActions } from "redux-actions";
 
 export const CommentActions = createActions({
+
+    getContentComment: (payload) => payload,
+
+    //api
+    //get comment
     getCommentRequest: undefined,
     getCommentSuccess: (payload) => payload,
     getCommentFailure: (err) => err,

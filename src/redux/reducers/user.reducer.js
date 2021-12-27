@@ -21,7 +21,7 @@ const authReducer = (state = initialState, action) => {
         case USER_ONLINE:
             return {
                 ...state,
-                userOnline: action.payload.filter(user => user._id !== state.infoUser?._id),
+                userOnline: action.payload.filter(user => user.user_id !== state.infoUser?._id),
             }
         case LOG_IN:
             return {

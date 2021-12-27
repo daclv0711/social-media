@@ -1,4 +1,4 @@
-export const statusState$ = state => state.status.allStatus;
+export const statusState$ = state => state.status;
 
 export const modalStatusState$ = state => state.status.showModal;
 

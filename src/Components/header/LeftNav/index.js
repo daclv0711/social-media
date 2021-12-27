@@ -4,17 +4,17 @@ import { Input, Wrapper } from './index.styles';
 import Logo from 'assets/images/fb-logo.png';
 import { Avatar, Col } from 'antd';
 import { Link } from 'react-router-dom';
-function LeftNav({ user }) {
+function LeftNav({ isLogin }) {
     return (
         <Wrapper>
             <Link to="/">
                 <Avatar src={Logo} size={40} alt='logo' />
             </Link>
-            {user &&
-                <Col xs={0}>
+            {isLogin &&
+                <Col md={24} xs={0}>
                     <Input>
                         <label htmlFor="search"><SearchOutlined /></label>
-                        <input placeholder="Search" name='search' id='search' />
+                        <input placeholder="Tìm kiếm..." name='search' id='search' />
                     </Input>
                 </Col>
             }

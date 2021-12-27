@@ -49,7 +49,7 @@ export const StatusAction = createActions({
     //like status
     likeStatusRequest: (payload) => payload,
     //get status
-    getStatusRequest: undefined,
+    getStatusRequest: (payload) => payload,
     getStatusSuccess: (payload) => payload,
     getStatusFailure: (err) => err,
 

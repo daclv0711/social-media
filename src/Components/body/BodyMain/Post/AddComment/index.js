@@ -4,30 +4,54 @@ import { FormAddComment } from './index.styles';
 import ImgUser from 'assets/images/no-img.png'
 import { Input, Image } from 'antd';
 import { CommentActions } from 'redux/actions/comment.action';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { socket } from 'constants/socket.io';
+import { contentCommentState$ } from 'redux/selectors/comment';
 
 function AddComment({ statusId, userImg }) {
     const [form] = FormAddComment.useForm();
     const dispatch = useDispatch();
-
     const inputRef = useRef(null);
+
+    const contentComment = useSelector(contentCommentState$)
+    useEffect(() => {
+        inputRef.current.focus();
+        dispatch(CommentActions.getContentComment());
+    }, [dispatch])
+
+    useEffect(() => {
+        if (contentComment?.status_id === statusId) {
+            inputRef.current.focus();
+            form.setFieldsValue({
+                comment: contentComment?.comment
+            });
+        }
+        return () => {
+        }
+    }, [contentComment, form, statusId])
     // useImperativeHandle(ref, () => ({
     //     focusInput() {
     //         inputComment.current.focus();
     //     }
     // }));
-    useEffect(() => {
-        inputRef.current.focus();
-    }, [])
+
     const handleSubmitComment = (data) => {
-        dispatch(CommentActions.createCommentRequest({
-            _id: statusId,
-            data: {
-                ...data,
-                statusId,
-            }
-        }));
+        if (contentComment && contentComment.status_id === statusId) {
+            dispatch(CommentActions.updateCommentRequest({
+                comment: data.comment,
+                statusId: statusId,
+                commentId: contentComment._id
+            }));
+            dispatch(CommentActions.getContentComment());
+        } else {
+            dispatch(CommentActions.createCommentRequest({
+                _id: statusId,
+                data: {
+                    ...data,
+                    statusId,
+                }
+            }));
+        }
         form.resetFields();
         socket.emit('blur-comment', statusId);
     }

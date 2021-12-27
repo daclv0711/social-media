@@ -3,10 +3,16 @@ const { CommentActions } = require("redux/actions/comment.action")
 
 const initialState = {
     comments: [],
+    contentComment: "",
 }
 
 const commentReducer = (state = initialState, action) => {
     switch (action.type) {
+        case getType(CommentActions.getContentComment):
+            return {
+                ...state,
+                contentComment: action.payload,
+            }
         case getType(CommentActions.getCommentSuccess):
             return {
                 ...state,

@@ -42,7 +42,7 @@ export const changePassword = (userId, data) => instance.put(`/user/change-passw
 })
 //status
 
-export const getStatus = () => instance.get('/status')
+export const getStatus = (skip) => instance.get(`/status?skip=${skip}`)
 
 export const postStatus = (data) => instance.post('/status', data, {
     headers: {

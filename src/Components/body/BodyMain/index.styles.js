@@ -3,7 +3,7 @@ import { Flex, FlexAll, FlexDir } from 'utils/FlexStyles';
 
 export const Wrapper = styled(FlexDir)`
     margin:0 auto;
-    margin-top: 1rem;
+    padding-top: 1rem;
     position: relative;
     width: var(--width-body-main);
     align-items: center;

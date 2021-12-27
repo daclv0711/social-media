@@ -20,9 +20,10 @@ function Comments({ comment, user }) {
     const dispatch = useDispatch()
 
     const handleClickLikeComment = (id) => {
-        dispatch(CommentActions.likeCommentRequest({
-            comment_id: id
-        }))
+        if (user)
+            dispatch(CommentActions.likeCommentRequest({
+                comment_id: id
+            }))
     }
 
     return (

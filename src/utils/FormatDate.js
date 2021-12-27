@@ -3,15 +3,19 @@ const Month = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Thá
 
 export const FormatDate = (date) => {
     let d = Date.now() - (new Date(date))
-    let h = Math.floor(d / 1000)
-    if (h < 60) {
+    let s = Math.floor(d / 1000)
+    if (s < 60) {
         return `Vừa xong`
-    } else if (h < 3600) {
-        return `${Math.floor(h / 60)} phút trước`
-    } else if (h < 86400) {
-        return `${Math.floor(h / 3600)} giờ trước`
+    } else if (s < 3600) {
+        return `${Math.floor(s / 60)} phút trước`
+    } else if (s < 86400) {
+        return `${Math.floor(s / 3600)} giờ trước`
+    } else if (s < 2592000) {
+        return `${Math.floor(s / 86400)} ngày trước`
+    } else if (s < 31536000) {
+        return `${Math.floor(s / 2592000)} tháng trước`
     } else {
-        return `${Math.floor(h / 86400)} ngày trước`
+        return `${Math.floor(s / 31536000)} năm trước`
     }
 }
 

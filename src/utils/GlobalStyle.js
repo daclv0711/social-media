@@ -30,6 +30,8 @@ export const GlobalStyle = createGlobalStyle`
 }
 * {
     font-family: 'Abel', sans-serif;  
+    padding: 0;
+    margin: 0;
     ::-webkit-scrollbar {
       width: 8px;
     }

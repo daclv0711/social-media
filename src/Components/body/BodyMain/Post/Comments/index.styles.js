@@ -74,7 +74,7 @@ export const CommentAction = styled(Flex)`
 export const MenuOptionComment = styled(Menu)`
     border-radius: 10px;
     padding: 4px;
-    width: 150px;
+    min-width: 150px;
     .ant-dropdown-menu-item {
         border-radius: 10px;
         padding: 8px 12px
