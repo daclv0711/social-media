@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { showStatusModal, StatusAction, statusModalContent, statusModalTitle } from 'redux/actions/status.action';
 import { infoUserState$ } from 'redux/selectors/user';
 import { FormatDate, FormatFullDate } from 'utils/FormatDate';
-import { ListOldStatus, TitleModal } from './index.styles';
+import { ListOldStatus, MenuOptionStatus, TitleModal } from './index.styles';
 
-function OptionsStatus({ status }) {
+function OptionsStatus(status) {
 
     const dispatch = useDispatch();
     const [visible, setVisible] = React.useState(false);
@@ -31,7 +31,7 @@ function OptionsStatus({ status }) {
     }
 
     return (
-        <>
+        <MenuOptionStatus>
             {
                 user._id === status.user_id &&
                 <>
@@ -72,7 +72,7 @@ function OptionsStatus({ status }) {
                     })
                 }
             </Modal>
-        </>
+        </MenuOptionStatus>
     )
 }
 

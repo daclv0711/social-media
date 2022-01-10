@@ -55,13 +55,6 @@ export const PostTime = styled(Flex)`
     }
 `;
 
-export const PostContent = styled.div`
-    margin-bottom: 0.8rem;
-    overflow-wrap: break-word;
-    white-space: break-spaces;
-    word-break: break-word;
-`;
-
 export const PostHashtag = styled(Link)`
     color: var(--blue);
     cursor: pointer;

@@ -4,8 +4,10 @@ import { useDispatch } from 'react-redux';
 import { CommentActions } from 'redux/actions/comment.action';
 import { FormatDate, FormatFullDate } from 'utils/FormatDate';
 import { ListOldStatus, TitleModal } from '../MenuStatus/index.styles';
+import { MenuOptionComment } from './index.styles';
 
-function OptionsComment({ comment, userId }) {
+function OptionsComment(comment, userId) {
+
     const dispatch = useDispatch();
     const [visible, setVisible] = React.useState(false);
 
@@ -29,7 +31,7 @@ function OptionsComment({ comment, userId }) {
     }
 
     return (
-        <>
+        <MenuOptionComment>
             {
                 userId === comment.user_id &&
                 <>
@@ -71,7 +73,7 @@ function OptionsComment({ comment, userId }) {
                     })
                 }
             </Modal>
-        </>
+        </MenuOptionComment>
     )
 }
 

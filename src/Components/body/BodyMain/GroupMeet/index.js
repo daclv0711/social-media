@@ -13,7 +13,7 @@ function GroupMeet() {
 
     useEffect(() => {
         setWithScroll(Wrap.current.scrollWidth);
-        setWithWrap(Wrap.current.offsetWidth);
+        setWithWrap(Wrap.current.clientWidth);
         setCurrentScroll(widthScroll - widthWrap);
     }, [currentWrap, widthScroll, widthWrap])
 

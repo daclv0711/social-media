@@ -4,7 +4,9 @@ import { FormatDate } from 'utils/FormatDate'
 import { MenuOption, ProfileUser, Title } from './index.styles'
 
 function MenuOptionNotify({ user, ImgUser }) {
+
     const [readNotify, setReadNotify] = React.useState(true)
+
     return (
         <>
             <Title>Thông báo</Title>

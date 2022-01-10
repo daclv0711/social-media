@@ -1,7 +1,7 @@
 import { EllipsisOutlined, LikeFilled } from '@ant-design/icons';
 import React from 'react';
 import { BlockImgUser } from '../../index.styles';
-import { Comment, CommentAction, MenuOptionComment, WrapperComment } from './index.styles';
+import { Comment, CommentAction, WrapperComment } from './index.styles';
 import ImgUser from 'assets/images/no-img.png'
 import { PostIconOptions } from '../MenuStatus/index.styles';
 import { FormatDate } from 'utils/FormatDate';
@@ -12,11 +12,6 @@ import OptionsComment from './OptionsComment';
 
 function Comments({ comment, user }) {
 
-    const menu = (
-        <MenuOptionComment>
-            <OptionsComment comment={comment} userId={user?._id} />
-        </MenuOptionComment>
-    )
     const dispatch = useDispatch()
 
     const handleClickLikeComment = (id) => {
@@ -46,7 +41,7 @@ function Comments({ comment, user }) {
                             }
                         </div>
                     </div>
-                    {user && <Dropdown overlay={menu} trigger={['click']} placement="bottomLeft">
+                    {user && <Dropdown overlay={OptionsComment(comment, user?._id)} trigger={['click']} placement="bottomLeft">
                         <PostIconOptions>
                             <EllipsisOutlined />
                         </PostIconOptions>

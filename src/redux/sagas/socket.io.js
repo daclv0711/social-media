@@ -4,13 +4,18 @@ import { socket } from "constants/socket.io";
 import { CommentActions } from "redux/actions/comment.action";
 import { getNotification } from "redux/actions/notification.action";
 import { hideStatusLoadingInput, showStatusLoadingInput, StatusAction } from "redux/actions/status.action";
-import { getUserOnline } from "redux/actions/user.action";
+import { getUserOnline, UserAction } from "redux/actions/user.action";
 
 function createSocketChannel() {
     return eventChannel(emit => {
         socket.on("connect", () => {
             console.log("connected");
         })
+
+        socket.on("users", (data) => {
+            emit(UserAction.getAllUsersSuccess(data));
+        })
+
         socket.on("list-user", data => {
             emit(getUserOnline(data));
         });

@@ -3,7 +3,7 @@ import { Wrapper, Block, PostSuccess } from './index.styles';
 // import Stories from './Stories';
 import AddStatus from './AddStatus';
 import Status from './Post';
-import GroupMeet from './GroupMeet';
+// import GroupMeet from './GroupMeet';
 import LoadingPost from './LoadingPost';
 import { statusState$ } from 'redux/selectors/status';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,16 +11,18 @@ import { StatusAction } from 'redux/actions/status.action';
 import ModalStatus from './ModalStatus';
 import { CommentActions } from 'redux/actions/comment.action';
 import { CheckCircleTwoTone } from '@ant-design/icons';
-import { infoUserState$ } from 'redux/selectors/user';
+import { allUsersState$, infoUserState$ } from 'redux/selectors/user';
 
 function BodyMain(props) {
     const dispatch = useDispatch()
 
     const user = useSelector(infoUserState$)
 
+    const allUsers = useSelector(allUsersState$)
+
     const statusState = useSelector(statusState$);
 
-    const { allUsers, title, showModal, allStatus, total, modalContent, loadingInput, loading } = statusState;
+    const { title, showModal, allStatus, total, modalContent, loadingInput, loading } = statusState;
 
     useEffect(() => {
         allStatus.length === 0 && dispatch(StatusAction.getStatusRequest(0))
@@ -32,10 +34,16 @@ function BodyMain(props) {
 
     const refMain = useRef(null)
     const handleScroll = useCallback(() => {
-        if ((refMain?.current.offsetHeight + 56 === Math.ceil(window.innerHeight + document.scrollingElement.scrollTop)) && (allStatus.length < total)) {
+        const heightBody = refMain?.current?.clientHeight;
+        const heightScroll = window.innerHeight + document.documentElement.scrollTop;
+
+        if ((((heightBody + 56 === Math.ceil(heightScroll)) && !loading)
+            || ((heightBody + 56 === Math.ceil(heightScroll) + 1) && !loading)
+            || ((heightBody + 56 === Math.ceil(heightScroll) - 1) && !loading))
+            && (allStatus.length < total)) {
             dispatch(StatusAction.getStatusRequest(allStatus.length))
         }
-    }, [dispatch, allStatus.length, total])
+    }, [dispatch, allStatus.length, total, loading])
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll)
@@ -78,7 +86,7 @@ function BodyMain(props) {
             <ModalStatus title={title} content={modalContent} showModal={showModal} />
             {/* <Stories /> */}
             <AddStatus user={user} />
-            <GroupMeet />
+            {/* <GroupMeet /> */}
             {
                 statusUser.map(status => <Status
                     key={status._id}

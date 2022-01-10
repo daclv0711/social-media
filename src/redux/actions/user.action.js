@@ -21,6 +21,9 @@ export const isLoginFalse = () => {
 }
 
 export const UserAction = createActions({
+    //all user
+    getAllUsersSuccess: (payload) => payload,
+
     //signin
     postSignInRequest: (payload) => payload,
     postSignInSuccess: (payload) => payload,

@@ -2,7 +2,7 @@ import { Col, Row } from 'antd'
 import InfoChat from 'Components/chat/ChatInfo'
 import MainChat from 'Components/chat/ChatMain'
 import MenuChat from 'Components/chat/ChatMenu'
-import React from 'react'
+import React, { useState } from 'react'
 
 const styles = {
     overflow: 'hidden',
@@ -15,11 +15,17 @@ function Chat() {
 
     document.title = 'Tin nhắn'
 
+    const [isOpenInfo, setIsOpenInfo] = useState(true)
+
+    const handleOpenInfo = () => {
+        setIsOpenInfo(!isOpenInfo)
+    }
+
     return (
         <Row style={styles}>
             <Col md={7} xs={24}><MenuChat /></Col>
-            <Col md={11} xs={0}><MainChat /></Col>
-            <Col md={6} xs={0}><InfoChat /></Col>
+            <Col md={isOpenInfo ? 11 : 17} xs={0}><MainChat handleOpenInfo={handleOpenInfo} /></Col>
+            <Col md={isOpenInfo ? 6 : 0} xs={0}><InfoChat /></Col>
         </Row>
     )
 }

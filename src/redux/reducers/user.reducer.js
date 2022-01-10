@@ -14,6 +14,7 @@ const initialState = {
     otpError: "",
     resetPassword: false,
     resetPasswordError: "",
+    allUsers: [],
 }
 
 const authReducer = (state = initialState, action) => {
@@ -32,6 +33,11 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLogin: false,
+            }
+        case getType(UserAction.getAllUsersSuccess):
+            return {
+                ...state,
+                allUsers: action.payload,
             }
         case getType(UserAction.postSignInSuccess):
             return {

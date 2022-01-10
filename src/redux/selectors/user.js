@@ -1,3 +1,4 @@
+export const allUsersState$ = state => state.user.allUsers;
 
 export const passwordWrongState$ = state => state.user.passwordWrong;
 
