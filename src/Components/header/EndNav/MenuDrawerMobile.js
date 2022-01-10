@@ -33,10 +33,12 @@ function MenuDrawerMobile({ user, ImgUser, onClose }) {
                                 <div className='content'>Cài đặt</div>
                             </ProfileItem>
                         </Link>
-                        <ProfileItem>
-                            <MessageTwoTone twoToneColor="#eb2f96" />
-                            <div className='content'>Tin nhắn</div>
-                        </ProfileItem>
+                        <Link to='/chat'>
+                            <ProfileItem>
+                                <MessageTwoTone twoToneColor="#eb2f96" />
+                                <div className='content'>Tin nhắn</div>
+                            </ProfileItem>
+                        </Link>
                         <ProfileItem onClick={handleClickSignOut}>
                             <LogoutOutlined />
                             <div className='content'>Đăng xuất</div>

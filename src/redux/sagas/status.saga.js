@@ -1,5 +1,5 @@
 import { call, put } from '@redux-saga/core/effects';
-import { postStatus, getStatus, deleteStatus, updateStatus, getAllUsers, likeStatus } from 'apis/api';
+import { postStatus, getStatus, deleteStatus, updateStatus, likeStatus } from 'apis/api';
 import { socket } from 'constants/socket.io';
 import { hiddenLoading, showLoading } from 'redux/actions/loading';
 import { StatusAction } from '../actions/status.action';
@@ -8,8 +8,6 @@ export const getStatusSaga = function* ({ payload }) {
     try {
         const status = yield call(getStatus, payload);
         yield put(StatusAction.getStatusSuccess(status?.data));
-        const users = yield call(getAllUsers);
-        yield put(StatusAction.getAllUsersSuccess(users?.data));
     } catch (error) {
         yield put(StatusAction.getStatusFailure(error));
     }

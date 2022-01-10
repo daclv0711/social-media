@@ -5,8 +5,7 @@ import { Avatar } from 'antd'
 import { InfoCircleTwoTone, PhoneTwoTone, VideoCameraTwoTone } from '@ant-design/icons'
 import AddChat from './AddChat'
 import BodyChat from './BodyChat'
-function ChatMain() {
-
+function ChatMain({ handleOpenInfo }) {
 
     return (
         <WrapperChatMain>
@@ -22,7 +21,7 @@ function ChatMain() {
                     <div className='header-content-icon'>
                         <VideoCameraTwoTone />
                     </div>
-                    <div className='header-content-icon'>
+                    <div className='header-content-icon' onClick={handleOpenInfo}>
                         <InfoCircleTwoTone />
                     </div>
                 </div>

@@ -17,9 +17,9 @@ export default function MenuOptionAccount({ user, ImgUser }) {
         <>
             <MenuOption.Item key='1'>
                 <ProfileUser>
-                    <Avatar src={user.avatar || ImgUser} size={60} />
+                    <Avatar src={user?.avatar || ImgUser} size={60} />
                     <div className='info'>
-                        <div className='user-name'>{user.last_name} {user.first_name}</div>
+                        <div className='user-name'>{user?.last_name} {user?.first_name}</div>
                         <div className='content'>Xem trang cá nhân của bạn</div>
                     </div>
                 </ProfileUser>

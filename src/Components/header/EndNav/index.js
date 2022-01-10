@@ -6,9 +6,10 @@ import { Avatar, Badge, Button, Col, Dropdown, Row, Tooltip } from 'antd';
 import { useSelector } from 'react-redux';
 import MenuOptionNotify from './MenuOptionNotify';
 import MenuOptionAccount from './MenuOptionAccount';
-import { notifyStatusState$, allUsersState$ } from 'redux/selectors/status';
+import { notifyStatusState$ } from 'redux/selectors/status';
 import { Link } from 'react-router-dom';
 import MenuDrawerMobile from './MenuDrawerMobile';
+import { allUsersState$ } from 'redux/selectors/user';
 
 function EndNav({ user, isLogin }) {
 
@@ -80,7 +81,7 @@ function EndNav({ user, isLogin }) {
                         </Col>
                         <Col xs={0} md={4} style={{ flex: '0 0 0' }}>
 
-                            <Tooltip title="Messenger" placement="bottom">
+                            <Tooltip title="Tin nhắn" placement="bottom">
                                 {/* <Dropdown placement="bottomCenter" getPopupContainer={(triggerNode) => triggerNode} overlay={menuWechat} trigger={['click']}> */}
                                 <Link to='/chat'>
                                     <Badge count={0} offset={[-4, 6]}>
@@ -103,7 +104,11 @@ function EndNav({ user, isLogin }) {
                         </Col>
                         <Col xs={0} md={4} style={{ flex: '0 0 0' }}>
                             <Tooltip title="Tài khoản" placement="bottom">
-                                <Dropdown placement="bottomCenter" getPopupContainer={(triggerNode) => triggerNode} overlay={menu} trigger={['click']}>
+                                <Dropdown placement="bottomCenter"
+                                    getPopupContainer={(triggerNode) => triggerNode}
+                                    overlay={menu}
+                                    trigger={['click']}
+                                >
                                     <EndHeader>
                                         <CaretDownOutlined />
                                     </EndHeader>

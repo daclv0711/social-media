@@ -1,5 +1,5 @@
-import { EnvironmentOutlined, LikeFilled, LikeOutlined, MessageOutlined } from '@ant-design/icons';
-import { Image, Tooltip } from 'antd';
+import { LikeFilled, LikeOutlined, MessageOutlined } from '@ant-design/icons';
+import { Image, Tooltip, Typography } from 'antd';
 import ImgUser from 'assets/images/no-img.png';
 import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,10 +10,11 @@ import { FormatDate, FormatFullDate } from 'utils/FormatDate';
 import { Block, BlockImgUser } from '../index.styles';
 import AddComment from './AddComment';
 import Comments from './Comments';
-import { Action, NameUser, PostAddComment, PostContent, PostHashtag, PostImage, PostLodingInput, PostReaction, PostStatus, PostTime, PostUserInfo } from './index.styles';
+import { Action, NameUser, PostAddComment, PostImage, PostLodingInput, PostReaction, PostStatus, PostTime, PostUserInfo } from './index.styles';
 import MenuStatus from './MenuStatus';
 import Loading from 'assets/images/loading.gif';
 import { useNavigate } from 'react-router-dom';
+import { handleStatusPublic, handleStatusPublicText } from 'utils/handleStatusPublic';
 
 function Status({ status, user, loadingInput, allUsers }) {
     const [showComment, setShowComment] = React.useState(false);
@@ -56,18 +57,6 @@ function Status({ status, user, loadingInput, allUsers }) {
         else navigate('/account/login')
     }
 
-    const handlePublishStatus = (status) => {
-        switch (status) {
-            case 'public':
-                return 'Công khai'
-            case 'private':
-                return 'Chỉ mình tôi'
-            case 'friends':
-                return 'Bạn bè'
-            default:
-                return 'Công khai'
-        }
-    }
     return (
         <Block>
             <PostUserInfo>
@@ -81,8 +70,8 @@ function Status({ status, user, loadingInput, allUsers }) {
                             <div>{FormatDate(status.createdAt)}</div>
                         </Tooltip>
                         <div>.</div>
-                        <Tooltip title={handlePublishStatus(status.publices)} placement="bottom">
-                            <EnvironmentOutlined />
+                        <Tooltip title={handleStatusPublicText(status.publices)} placement="bottom">
+                            {handleStatusPublic(status.publices)}
                         </Tooltip>
                     </PostTime>
                 </NameUser>
@@ -90,12 +79,27 @@ function Status({ status, user, loadingInput, allUsers }) {
                 {user && <MenuStatus status={status} />}
 
             </PostUserInfo>
-            <PostContent>
+            {/* <div ref={refContent}
+            >
+                {handlestatus(status.status)}
+            </div> */}
+            <Typography.Paragraph
+                copyable
+                ellipsis={{
+                    expandable: true,
+                    symbol: 'xem thêm.',
+                    rows: 5,
+                    onEllipsis: ellipsis => {
+                        console.log('Ellipsis changed:', ellipsis);
+                    },
+                }}
+                style={{ wordBreak: 'break-word', whiteSpace: 'break-spaces' }}
+            >
                 {status.status}
-            </PostContent>
-            <PostHashtag to='/'>
+            </Typography.Paragraph>
+            {/* <PostHashtag to='/'>
                 #abc
-            </PostHashtag>
+            </PostHashtag> */}
             {status.image &&
                 <PostImage >
                     <Image src={status.image} alt={status.status} />
@@ -127,11 +131,10 @@ function Status({ status, user, loadingInput, allUsers }) {
             {
                 showComment &&
                 <>
-                    {user && <AddComment userImg={user.avatar} statusId={status._id} comment={dataComment} />}
                     {
                         dataComment.map(comment => <Comments key={comment._id} user={user} comment={comment} />)
                     }
-
+                    {user && <AddComment userImg={user.avatar} statusId={status._id} comment={dataComment} />}
                 </>
             }
             {

@@ -68,11 +68,6 @@ const statusReducer = (state = initialState, action) => {
                 allStatus: [action.payload, ...state.allStatus],
                 showModal: false
             }
-        case getType(StatusAction.getAllUsersSuccess):
-            return {
-                ...state,
-                allUsers: action.payload,
-            }
         case getType(StatusAction.updateStatusSuccess):
             const { allStatus } = state;
             const allStatusIndex = allStatus.findIndex(status => status._id === action.payload._id);
